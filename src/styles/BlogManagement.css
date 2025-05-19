@@ -1,0 +1,472 @@
+/* Overall Layout */
+.blog-admin {
+  padding: 20px;
+}
+
+/* Header */
+.blog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.blog-header h1 {
+  font-size: 2rem;
+}
+
+.blog-search input {
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-blog-btn {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.add-blog-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Table */
+.blog-table {
+  overflow-x: scroll;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.blog-table::-webkit-scrollbar {
+  display: none;
+}
+
+.blog-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #2c3e50;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.blog-table th,
+.blog-table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid rgba(44, 62, 80, 0.15);
+}
+
+.blog-table th {
+  background-color: #e9f0f7;
+  border-top: 2px solid #2c3e50;
+}
+
+
+
+  .blog-table th:nth-child(1),
+.blog-table td:nth-child(1) {
+    width: 40%; 
+}
+ .blog-table th:nth-child(2),
+.blog-table td:nth-child(2) {
+    width: 15%; 
+}
+
+
+ /* Button Layout for Actions */
+  .blog-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .blog-actions button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .icon-blog{
+    font-size: 18px;
+  }
+  
+
+  /* Seen button */
+
+  .seen-btn-blog{
+    background-color: #4da5e0;
+  }
+  .seen-btn-blog:hover{
+    background-color: rgba(104, 210, 224, 0.1);
+    transform: scale(1.1);
+  }
+  /* Edit Button (Green) */
+  .edit-btn-blog {
+    background-color: #28a745;
+  }
+  
+  .edit-btn-blog:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+  
+  /* Delete Button (Red) */
+  .delete-btn-blog {
+    background-color: #dc3545;
+  }
+  
+  .delete-btn-blog:hover {
+    background-color: rgba(36, 221, 119, 0.1);
+    transform: scale(1.1);
+  }
+  
+  /* Active Button (Lock - Black) */
+  .active-btn-blog {
+    background-color: #343a40;
+  }
+  
+  .active-btn-blog:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+
+/* Modal blog */
+.modal-box-blog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+
+.modal-content-blog {
+  position: relative;
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content-blog h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* Inputs, Textarea, Buttons */
+.modal-content-blog input,
+.modal-content-blog textarea,
+.modal-content-blog select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.modal-content-blog input:focus,
+.modal-content-blog textarea:focus,
+.modal-content-blog select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.close-btn-blog {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #2c3e50;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: background 0.3s;
+}
+
+.close-btn-blog:hover {
+  background: #1a2838;
+}
+
+/* Layout inside modal */
+.modal-form-blog {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+/* Left form (inputs and image upload) */
+.modal-form-left-blog {
+  flex: 0.7;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Preview image styling */
+.modal-form-left-blog .image-preview {
+  margin-bottom: 15px;
+  max-width: 100%;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+/* Right form (TinyMCE editor) */
+.modal-form-right-blog {
+  flex: 1.5;
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Buttons container */
+.modal-btn-blog {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-btn-blog button {
+  padding: 12px 30px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.modal-btn-blog button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+/* Blog Content View Modal */
+.modal-content-blog .blog-content {
+  padding: 20px;
+  line-height: 1.8;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.modal-content-blog .blog-content h1,
+.modal-content-blog .blog-content h2,
+.modal-content-blog .blog-content h3 {
+  color: #2c3e50;
+  margin: 1.5em 0 0.8em;
+  font-weight: 600;
+}
+
+.modal-content-blog .blog-content h1 {
+  font-size: 2rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-content-blog .blog-content h2 {
+  font-size: 1.7rem;
+}
+
+.modal-content-blog .blog-content h3 {
+  font-size: 1.4rem;
+}
+
+.modal-content-blog .blog-content p {
+  margin-bottom: 1.5em;
+  font-size: 1.1rem;
+}
+
+.modal-content-blog .blog-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content-blog .blog-content a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.modal-content-blog .blog-content a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.modal-content-blog .blog-content ul,
+.modal-content-blog .blog-content ol {
+  margin: 1.5em 0;
+  padding-left: 2em;
+}
+
+.modal-content-blog .blog-content li {
+  margin-bottom: 0.8em;
+}
+
+.modal-content-blog .blog-content blockquote {
+  border-left: 4px solid #3498db;
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  margin: 20px 0;
+  font-style: italic;
+  color: #555;
+}
+
+.modal-content-blog .blog-content pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 20px 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-content-blog .blog-content code {
+  background-color: #f5f5f5;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-content-blog .blog-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.modal-content-blog .blog-content table th,
+.modal-content-blog .blog-content table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.modal-content-blog .blog-content table th {
+  background-color: #f2f2f2;
+}
+
+/* Blog metadata */
+.blog-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.blog-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Featured image */
+.blog-featured-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Adjust Header for Small Screens */
+  .blog-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Make Heading Smaller */
+  .blog-header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Adjust Table for Mobile */
+  .blog-table table,
+  .blog-table th,
+  .blog-table td {
+    font-size: 0.9rem;
+  }
+
+  /* Adjust Modal Size */
+  .modal-content-blog {
+    width: 95%;
+    padding: 15px;
+  }
+
+  /* Button Adjustments */
+  .add-blog-btn {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  /* Input Adjustments */
+  .blog-search input {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+  }
+
+  /* Stack modal form columns */
+  .modal-form-blog {
+    flex-direction: column;
+  }
+
+  .modal-form-left-blog,
+  .modal-form-right-blog {
+    flex: none;
+    min-width: 100%;
+  }
+}
