@@ -25,16 +25,6 @@
     align-items: center; /* Đảm bảo các nút căn chỉnh ngang */
 }
 
-.navbar-link {
-    text-decoration: none;
-    color: white;
-    font-size: 1em;
-    padding: 8px 16px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center; /* Căn chỉnh icon và text ngang hàng */
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
-}
 
 .navbar-link svg {
     margin-right: 8px; /* Khoảng cách giữa icon và text */
@@ -42,6 +32,8 @@
 }
 
 /* Nút logout */
+.notify-btn,
+.user-btn,
 .logout-btn {
     background: #578fb8; /* Màu nền giống navbar */
     border: none;
@@ -52,19 +44,29 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    align-items: center;
     transition: background-color 0.3s, transform 0.2s ease-in-out;
     width: auto; /* Đảm bảo nút tự động điều chỉnh chiều rộng theo nội dung */
     margin-top: 20px;
 }
 
+
 /* Hover effect cho logout */
+.notify-btn:hover,
+.user-btn:hover,
 .logout-btn:hover {
     background: linear-gradient(135deg, #578fb8, #3774b1); /* Đổi màu nền khi hover */
     transform: scale(1.05); /* Phóng to nhẹ khi hover */
 }
 
 /* Icon của logout */
+.notify-btn svg,
+.user-btn svg,
 .logout-btn svg {
     margin-right: 8px;
     font-size: 1.2em; /* Kích thước của icon */
 }
+
+
+
+

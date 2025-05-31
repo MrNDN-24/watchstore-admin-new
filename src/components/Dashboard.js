@@ -20,6 +20,8 @@ import ProfileManagement from './ProfileManagement';
 import ActionProductManagement from './ActionProductManagement';
 import TopProductManagement from './TopProductManagement';
 import BlogManagement from './BlogManagement';
+import ChatMessageManagement from './ChatMessageManagement';
+import ActivityManagement from './ActivityManagement';
 import '../styles/Dashboard.css';
 
 
@@ -51,7 +53,9 @@ const Dashboard = () => {
                     <Route path="profile-management/:userId" element={<ProfileManagement/>} />
                     <Route path='action-product/:action/:productId?' element={<ActionProductManagement/>} />
                     <Route path="top-product" element={<TopProductManagement/>} />
+                    <Route path='chat-message' element={<ChatMessageManagement/>}/>
                     <Route path='blog-management' element={<BlogManagement/>}/>
+                    <Route path='activity-management' element={<ActivityManagement/>}/>
                 </Routes>
             </div>
         </div>

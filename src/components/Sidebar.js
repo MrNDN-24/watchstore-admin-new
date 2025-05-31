@@ -99,7 +99,7 @@
 // export default Sidebar;
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FaChartBar, FaTags, FaBox, FaCogs, FaUsers, FaShippingFast, FaListAlt, FaAppleAlt, FaChevronDown, FaChevronUp, FaClipboardList, FaShoppingCart, FaFileAlt } from 'react-icons/fa'; 
+import { FaChartBar, FaTags, FaBox, FaCogs, FaUsers, FaShippingFast, FaListAlt, FaAppleAlt, FaChevronDown, FaChevronUp, FaClipboardList, FaShoppingCart, FaFileAlt,FaRegCommentDots, FaTasks } from 'react-icons/fa'; 
 import Navbar from './Navbar'; 
 import useAuth from '../hooks/useAuth';
 import '../styles/Sidebar.css'; 
@@ -192,11 +192,13 @@ const Sidebar = () => {
                                 <li><NavLink to="/dashboard/user-management" className={({ isActive }) => isActive ? "active" : ""}><FaUsers /> Quản lý nhân viên</NavLink></li>
                                 <li><NavLink to="/dashboard/discount-management" className={({ isActive }) => isActive ? "active" : ""}><FaTags /> Quản lý khuyến mãi</NavLink></li>
                                 <li><NavLink to="/dashboard/blog-management" className={({ isActive }) => isActive ? "active" : ""}><FaFileAlt /> Quản lý bài viết</NavLink></li>
+                                   <li><NavLink to="/dashboard/activity-management" className={({ isActive }) => isActive ? "active" : ""}><FaTasks /> Quản lý hoạt động</NavLink></li>
                             </>
                         )}
                         {role === 'salesperson' && (
                             <>
                                 <li><NavLink to="/dashboard/orderSale-management" className={({ isActive }) => isActive ? "active" : ""}><FaBox /> Quản lý đơn hàng</NavLink></li>
+                                <li><NavLink to="/dashboard/chat-message" className={({ isActive }) => isActive ? "active" : ""}><FaRegCommentDots /> Tin nhắn</NavLink></li>
                             </>
                         )}
                         {role === 'deliverystaff' && (

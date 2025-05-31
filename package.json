@@ -34,6 +34,7 @@
     "react-toastify": "^10.0.6",
     "recharts": "^2.13.3",
     "redux": "^5.0.1",
+    "socket.io-client": "^4.8.1",
     "styled-components": "^6.1.13",
     "tinymce": "^7.9.0",
     "typeface-roboto": "^1.1.13",
