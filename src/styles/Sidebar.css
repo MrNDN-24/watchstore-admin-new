@@ -1,47 +1,89 @@
 /* Sidebar Container */
 .sidebar-container {
     position: fixed;
-    top: 60px; /* Đặt Sidebar dưới Navbar */
+    top: 60px;
     left: 0;
-    height: calc(100vh - 60px); /* Chiều cao của Sidebar dưới Navbar */
-    width: 280px; /* Sidebar width */
-    background-color: #fff; /* Đổi màu nền Sidebar thành màu trắng */
-    z-index: 500; /* Sidebar dưới Navbar */
-    box-shadow: 6px 0 25px rgba(77, 107, 134, 0.4); /* Tăng độ shadow */
+    height: calc(100vh - 60px);
+    width: 280px;
+    background-color: #fff;
+    z-index: 500;
+    box-shadow: 6px 0 25px rgba(77, 107, 134, 0.4);
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar-container.collapsed {
+    width: 80px;
+}
+
+/* Collapse button */
+.collapse-btn {
+    position: absolute;
+    right: -15px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 501;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.collapse-btn:hover {
+    background: #3498db;
+    transform: scale(1.1);
 }
 
 /* Sidebar content */
 .sidebar {
     padding: 20px;
-    color: #333; /* Đổi màu chữ trong Sidebar thành màu tối */
+    color: #333;
     overflow-y: auto;
-    height: 100%; /* Giữ Sidebar có chiều cao đầy đủ */
+    height: 100%;
+    position: relative;
+}
+
+.sidebar-container.collapsed .sidebar {
+    padding: 20px 10px;
 }
 
 /* Sidebar Navigation */
 .sidebar nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .sidebar nav ul li {
     margin-bottom: 15px;
+    position: relative;
 }
 
 .sidebar nav ul li a {
     text-decoration: none;
-    color: #333; /* Đổi màu chữ của các menu item thành màu tối */
-    padding: 10px 15px;
+    color: #333;
+    padding: 10px;
     display: flex;
-    align-items: center; /* Căn giữa icon và text */
+    align-items: center;
     border-radius: 8px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    transition: all 0.3s ease;
+    justify-content: center;
+}
+
+.sidebar-container:not(.collapsed) nav ul li a {
+    justify-content: flex-start;
+    padding: 10px 15px;
 }
 
 .sidebar nav ul li a:hover {
     background-color: #2980b9;
     color: white;
-    transform: scale(1.05);
 }
 
 .sidebar nav ul li a.active {
@@ -50,43 +92,23 @@
     font-weight: 700;
 }
 
-/* Style cho menu toggle */
-.menu-toggle {
-    cursor: pointer;
-    text-decoration: none;
-    color: #333; /* Đổi màu chữ của menu toggle */
-    padding: 10px 15px;
-    display: flex;
-    align-items: center; /* Căn giữa icon và text */
-    border-radius: 8px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-    justify-content: space-between; /* Tạo không gian giữa icon và text */
+/* Hide text when collapsed */
+.sidebar-container.collapsed nav ul li a span {
+    display: none;
 }
 
-/* Hiển thị mũi tên */
-.menu-arrow {
-    font-size: 18px; /* Kích thước mũi tên */
-    margin-left: 15px; /* Khoảng cách giữa text và mũi tên */
-}
-
-/* Style cho menu toggle khi hover */
-.menu-toggle:hover {
-    background-color: #2980b9;
-    color: white;
-}
-
-/* Style cho icon trong Sidebar */
-.sidebar nav ul li a svg {
-    margin-right: 10px; /* Khoảng cách giữa icon và text */
-    font-size: 18px; /* Kích thước icon */
-}
-
-/* Style cho menu con */
+/* Submenu */
 .submenu {
     list-style-type: none;
-    padding-left: 40px; /* Thụt vào thêm một chút */
-    margin-top: 5px; /* Thêm khoảng cách trên để menu con không bị dính với mục chính */
+    padding-left: 40px;
+    margin-top: 5px;
     margin-left: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-container.collapsed .submenu {
+    display: none;
 }
 
 .submenu li {
@@ -95,16 +117,52 @@
 
 .submenu li a {
     text-decoration: none;
-    color: #333; /* Đổi màu chữ trong menu con thành màu tối */
+    color: #333;
     padding: 8px 15px;
     display: block;
     border-radius: 8px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    transition: all 0.3s ease;
 }
 
 .submenu li a:hover {
     background-color: #2980b9;
     color: white;
-    transform: scale(1.05);
 }
 
+/* Icons */
+.sidebar nav ul li a svg {
+    margin-right: 0;
+    font-size: 20px;
+    min-width: 24px;
+}
+
+.sidebar-container:not(.collapsed) nav ul li a svg {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Tooltip for collapsed state */
+.sidebar-container.collapsed nav ul li a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #2980b9;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    margin-left: 15px;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+.sidebar-container.collapsed nav ul li a:hover::after {
+    opacity: 1;
+    visibility: visible;
+}

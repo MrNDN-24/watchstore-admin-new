@@ -206,7 +206,7 @@ const CustomerManagement = () => {
           <tbody>
             {customers.map((customer) => (
               <tr key={customer._id}>
-                <td>{customer._id}</td>
+                <td>{customer._id?.slice(0, 10) || "-"}</td>
                 <td>{customer.name}</td>
                 <td>{customer.email}</td>
                 <td>{customer.phone}</td>

@@ -10,16 +10,17 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/ActivityManagement.css";
 import { FaTrashAlt, FaEye } from "react-icons/fa";
 
+
 const ActivityManagement = () => {
   const [activities, setActivities] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 10;
-  const [userIdFilter, setUserIdFilter] = useState("");
+  const itemsPerPage = 5;
   const [detailActivity, setDetailActivity] = useState(null);
+  const [search, setSearch] = useState("");
 
   const fetchData = (page = 1) => {
-    getActivities(page, itemsPerPage, userIdFilter)
+    getActivities(page, itemsPerPage, search)
       .then((data) => {
         setActivities(data.activities || data);
         setCurrentPage(data.page || page);
@@ -33,7 +34,11 @@ const ActivityManagement = () => {
 
   useEffect(() => {
     fetchData(currentPage);
-  }, [currentPage, userIdFilter]);
+  }, [currentPage, search]);
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+    setCurrentPage(1);
+  };
   const handleViewDetail = async (id) => {
     try {
       const data = await getActivityById(id);
@@ -75,17 +80,16 @@ const ActivityManagement = () => {
       view_product_details: "Xem chi tiết sản phẩm",
       add_to_cart: "Thêm vào giỏ hàng",
       remove_from_cart: "Xóa khỏi giỏ hàng",
-      purchase: "Đặt hàng",
-      search: "Tìm kiếm",
-      like_product: "Yêu thích sản phẩm",
       view_discount_program: "Xem chương trình giảm giá",
-      apply_discount_code: "Áp dụng mã giảm giá",
       view_blog: "Xem bài viết",
-      start_chat: "Bắt đầu trò chuyện",
       view_order_history: "Xem lịch sử đơn hàng",
-      register: "Đăng ký",
       login: "Đăng nhập",
       logout: "Đăng xuất",
+      mark_all_notify_read: "Đánh dấu đã đọc hết tất cả thông báo",
+      mark_notify_read: "Đánh dấu đã đọc thông báo",
+      create_order: "Tạo đơn hàng mua",
+      cancel_order: "Hủy đơn hàng",
+      create_conversation: "Tạo cuộc trò chuyện với nhân viên",
     };
     return translations[type] || type;
   };
@@ -98,6 +102,7 @@ const ActivityManagement = () => {
       Blog: "Bài viết",
       Order: "Đơn hàng",
       User: "Người dùng",
+      Notify: "Thông báo",
     };
     return translations[model] || model;
   };
@@ -116,13 +121,11 @@ const ActivityManagement = () => {
   return (
     <div className="activity-management">
       <h1>Quản Lý Hoạt Động Người Dùng</h1>
-
       <div className="filter-search">
         <input
           type="text"
-          placeholder="Lọc theo User ID"
-          value={userIdFilter}
-          onChange={(e) => setUserIdFilter(e.target.value)}
+          placeholder="Tìm kiếm"
+          onChange={handleSearchChange}
         />
       </div>
 

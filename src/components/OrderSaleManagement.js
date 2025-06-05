@@ -252,7 +252,7 @@ const OrderSaleManagement = () => {
             ) : (
               filteredOrders.map((order) => (
                 <tr key={order._id}>
-                  <td>{order._id}</td>
+                  <td>{order._id?.slice(0, 10) || "-"}</td>
                   <td>{order.user_name}</td>
                   <td>{order.deliveryStatus}</td>
                   <td>{order.total_price.toLocaleString()} VND</td>

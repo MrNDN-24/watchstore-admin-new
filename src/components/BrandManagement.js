@@ -216,7 +216,7 @@ const BrandManagement = () => {
           <tbody>
             {brands.map((brand) => (
               <tr key={brand._id}>
-                <td>{brand.brandID}</td>
+                <td>{brand._id?.slice(0, 10) || "-"}</td>
                 <td>{brand.name}</td>
                 <td>{brand.description}</td>
                 <td>

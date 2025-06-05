@@ -230,7 +230,7 @@ const StyleManagement = () => {
             {
               styles.map((style) => (
                 <tr key={style._id}>
-                  <td>{style.styleID}</td>
+                  <td>{style._id?.slice(0, 10) || "-"}</td>
                   <td>{style.name}</td>
                   <td>{style.description}</td>
                   <td>

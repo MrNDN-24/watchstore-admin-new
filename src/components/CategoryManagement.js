@@ -241,7 +241,7 @@ const CategoryManagement = () => {
           <tbody>
             { categories.map((category) => (
                 <tr key={category._id}>
-                  <td>{category.categoryID}</td>
+                  <td>{category._id?.slice(0, 10) || "-"}</td>
                   <td>{category.name}</td>
                   <td>{category.description}</td>
                   <td>

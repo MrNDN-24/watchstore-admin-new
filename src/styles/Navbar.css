@@ -1,72 +1,174 @@
 /* Navbar styles */
 .navbar {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: linear-gradient(135deg, #3c5b7a, #578fb8);
-    padding: 10px 20px;
-    color: white;
-    box-sizing: border-box;
-    z-index: 1000; /* Navbar on top */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(135deg, #1a2a3a, #2c4a6b);
+  padding: 0 1rem;
+  color: white;
+  box-sizing: border-box;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  width: 100%; /* Thay max-width bằng width 100% */
+  margin: 0;
+  padding: 0 1rem; /* Thêm padding thay vì để trên .navbar */
+}
+
+.navbar-content h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+  letter-spacing: 1px;
 }
 
 .navbar-links {
-    display: flex;
-    gap: 15px; /* Điều chỉnh khoảng cách giữa các nút */
-    align-items: center; /* Đảm bảo các nút căn chỉnh ngang */
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto; /* Đẩy toàn bộ sang phải */
+  padding-right: 60px; 
 }
 
-
-.navbar-link svg {
-    margin-right: 8px; /* Khoảng cách giữa icon và text */
-    font-size: 1.2em; /* Kích thước của icon */
+/* Notification Button */
+.notify-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2.0rem; /* Tăng kích thước icon */
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-top: 12px;
 }
 
-/* Nút logout */
-.notify-btn,
-.user-btn,
-.logout-btn {
-    background: #578fb8; /* Màu nền giống navbar */
-    border: none;
-    padding: 6px 10px; /* Điều chỉnh padding để nút nhỏ lại vừa với nội dung */
-    border-radius: 6px;
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    align-items: center;
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
-    width: auto; /* Đảm bảo nút tự động điều chỉnh chiều rộng theo nội dung */
-    margin-top: 20px;
+.notify-btn:hover {
+  color: #00f2fe;
+  transform: translateY(-2px);
 }
 
-
-/* Hover effect cho logout */
-.notify-btn:hover,
-.user-btn:hover,
-.logout-btn:hover {
-    background: linear-gradient(135deg, #578fb8, #3774b1); /* Đổi màu nền khi hover */
-    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+.notify-btn::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff4757;
+  border-radius: 50%;
 }
 
-/* Icon của logout */
-.notify-btn svg,
-.user-btn svg,
-.logout-btn svg {
-    margin-right: 8px;
-    font-size: 1.2em; /* Kích thước của icon */
+/* Avatar Dropdown */
+.avatar-dropdown {
+  position: relative;
 }
 
+.navbar-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
 
+.navbar-avatar:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.6);
+}
 
+/* Giữ nguyên phần dropdown menu */
+/* Giữ nguyên các phần còn lại */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 1001;
+  min-width: 180px;
+  animation: fadeIn 0.2s ease-in-out;
+  border: 1px solid #eee;
+}
 
+.dropdown-menu button {
+  width: 100%;
+  padding: 12px 15px;
+  background: none;
+  border: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.95em;
+  color: #444;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu button svg {
+  color: #578fb8;
+  font-size: 1rem;
+}
+
+.dropdown-menu button:hover {
+  background-color: #f8f9fa;
+  color: #2c4a6b;
+  padding-left: 20px;
+}
+
+.dropdown-menu button:first-child {
+  border-bottom: 1px solid #eee;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 0.5rem;
+  }
+  
+  .navbar-content {
+    padding: 0 0.5rem;
+  }
+  
+  .navbar-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-links {
+    gap: 10px;
+  }
+  
+  .notify-btn {
+    font-size: 1.2rem;
+    width: 26px;
+    height: 26px;
+  }
+  
+  .navbar-avatar {
+    width: 36px;
+    height: 36px;
+  }
+}

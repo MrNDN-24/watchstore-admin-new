@@ -1,17 +1,75 @@
+/* Dashboard Container */
 .dashboard-container {
     display: flex;
     position: fixed;
     top: 60px;
-    left: 280px;
+    left: 0;
     right: 0;
     bottom: 0;
-    flex-direction: column;
-    background-color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #f5f7fa;
     z-index: 100;
+    overflow: hidden;
+}
+
+/* Content Container */
+.content-container {
+    position: absolute;
+    left: 280px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 15px;
+    transition: left 0.3s ease-in-out;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    background-color: #fff;
     border-radius: 10px;
     margin: 15px;
-    padding-bottom: 5px;
-    height: calc(100vh - 60px); /* Chiếm toàn bộ chiều cao còn lại sau navbar */
-    overflow: hidden; /* Không hiển thị thanh cuộn trong dashboard */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content-container.expanded {
+    left: 80px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .content-container {
+        left: 80px;
+    }
+    
+    .content-container.expanded {
+        left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        left: 0;
+        margin: 10px;
+        padding: 10px;
+    }
+    
+    .content-container.expanded {
+        left: 80px;
+    }
+}
+
+/* Scrollbar styling */
+.content-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.content-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.content-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

@@ -32,7 +32,7 @@ const ProductManagement = () => {
     }
   };
 
-  //Xử lý search 
+  //Xử lý search
   const [search, setSearch] = useState("");
   useEffect(() => {
     getAllProducts(currentPage, itemsPerPage, search)
@@ -43,8 +43,7 @@ const ProductManagement = () => {
       })
       .catch((error) => console.error("Lỗi khi lấy thương hiệu:", error));
   }, [currentPage, search]);
-  
- 
+
   //Product
   const [products, setProducts] = useState([]);
 
@@ -129,7 +128,7 @@ const ProductManagement = () => {
     const isConfirmed = window.confirm(
       "Bạn có chắc chắn muốn xóa sản phẩm này?"
     );
-  
+
     if (isConfirmed) {
       deleteProduct(id)
         .then(() => {
@@ -147,12 +146,12 @@ const ProductManagement = () => {
         });
     }
   };
-  
+
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
     setCurrentPage(1); // Reset về trang đầu tiên khi tìm kiếm
   };
-  
+
   return (
     <div className="product-container">
       <div className="product-header">
@@ -186,7 +185,7 @@ const ProductManagement = () => {
           <tbody>
             {products.map((product) => (
               <tr key={product._id}>
-                <td>{product.productCode}</td>
+                <td>{product._id?.slice(0, 10) || "-"}</td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
                 <td>
@@ -254,12 +253,12 @@ const ProductManagement = () => {
             ))}
           </tbody>
         </table>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
 
       <ToastContainer />
     </div>

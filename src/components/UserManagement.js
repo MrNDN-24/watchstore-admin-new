@@ -229,7 +229,7 @@ const UserManagement = () => {
             {
               users.map((user) => (
                 <tr key={user._id}>
-                  <td>{user.userID}</td>
+                  <td>{user._id?.slice(0, 10) || "-"}</td>
                   <td>{user.username}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>

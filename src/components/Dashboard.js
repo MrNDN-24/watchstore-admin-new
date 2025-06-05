@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState }  from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import ProductManagement from './ProductManagement';
@@ -27,12 +27,17 @@ import '../styles/Dashboard.css';
 
 
 const Dashboard = () => {
+       const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+    const handleSidebarToggle = (collapsed) => {
+        setIsSidebarCollapsed(collapsed);
+    }
  
 
 
     return (
         <div className="dashboard-container">
-            <Sidebar />
+           <Sidebar onToggle={handleSidebarToggle} />
             <div className="content-container">
                 <Routes>
                     <Route path="product-management" element={<ProductManagement />} />
