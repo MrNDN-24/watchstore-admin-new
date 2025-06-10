@@ -1,27 +1,29 @@
+/* ===== Sidebar + Dashboard ===== */
+
 /* Sidebar Container */
 .sidebar-container {
     position: fixed;
-    top: 60px;
+    top: 50px;
     left: 0;
-    height: calc(100vh - 60px);
-    width: 280px;
+    height: calc(100vh - 50px);
+    width: 220px;
     background-color: #fff;
     z-index: 500;
-    box-shadow: 6px 0 25px rgba(77, 107, 134, 0.4);
+    box-shadow: 4px 0 15px rgba(77, 107, 134, 0.3);
     transition: width 0.3s ease-in-out;
 }
 
 .sidebar-container.collapsed {
-    width: 80px;
+    width: 70px;
 }
 
 /* Collapse button */
 .collapse-btn {
     position: absolute;
-    right: -15px;
-    top: 20px;
-    width: 30px;
-    height: 30px;
+    right: -12px;
+    top: 16px;
+    width: 26px;
+    height: 26px;
     background: #2980b9;
     color: white;
     border: none;
@@ -31,8 +33,9 @@
     align-items: center;
     justify-content: center;
     z-index: 501;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    font-size: 12px;
 }
 
 .collapse-btn:hover {
@@ -40,17 +43,23 @@
     transform: scale(1.1);
 }
 
-/* Sidebar content */
+/* Sidebar Content */
 .sidebar {
-    padding: 20px;
+    margin-top: 20px;
+    padding: 16px;
     color: #333;
     overflow-y: auto;
     height: 100%;
     position: relative;
+    font-size: 13px;
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar-container.collapsed .sidebar {
-    padding: 20px 10px;
+    padding: 16px 8px;
 }
 
 /* Sidebar Navigation */
@@ -61,35 +70,32 @@
 }
 
 .sidebar nav ul li {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     position: relative;
 }
 
 .sidebar nav ul li a {
     text-decoration: none;
     color: #333;
-    padding: 10px;
+    padding: 8px;
+    font-size: 13px;
     display: flex;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.3s ease;
     justify-content: center;
 }
 
 .sidebar-container:not(.collapsed) nav ul li a {
     justify-content: flex-start;
-    padding: 10px 15px;
+    padding: 8px 12px;
 }
 
-.sidebar nav ul li a:hover {
-    background-color: #2980b9;
-    color: white;
-}
-
+.sidebar nav ul li a:hover,
 .sidebar nav ul li a.active {
     background-color: #2980b9;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 /* Hide text when collapsed */
@@ -100,27 +106,26 @@
 /* Submenu */
 .submenu {
     list-style-type: none;
-    padding-left: 40px;
-    margin-top: 5px;
-    margin-left: 15px;
+    padding-left: 24px;
+    margin-top: 4px;
+    margin-left: 10px;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
-.sidebar-container.collapsed .submenu {
-    display: none;
-}
+
 
 .submenu li {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .submenu li a {
     text-decoration: none;
     color: #333;
-    padding: 8px 15px;
+    padding: 6px 12px;
+    font-size: 14px;
     display: block;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.3s ease;
 }
 
@@ -128,20 +133,27 @@
     background-color: #2980b9;
     color: white;
 }
+.sidebar-container.collapsed .submenu li a span {
+    display: none;
+}
+.sidebar-container.collapsed .submenu li a {
+    display: flex;
+    justify-content: center;
+}
 
 /* Icons */
 .sidebar nav ul li a svg {
     margin-right: 0;
-    font-size: 20px;
-    min-width: 24px;
+    font-size: 16px;
+    min-width: 20px;
 }
 
 .sidebar-container:not(.collapsed) nav ul li a svg {
-    margin-right: 10px;
-    font-size: 18px;
+    margin-right: 8px;
+    font-size: 15px;
 }
 
-/* Tooltip for collapsed state */
+/* Tooltip */
 .sidebar-container.collapsed nav ul li a::after {
     content: attr(data-tooltip);
     position: absolute;
@@ -150,19 +162,128 @@
     transform: translateY(-50%);
     background: #2980b9;
     color: white;
-    padding: 5px 10px;
+    padding: 4px 8px;
     border-radius: 4px;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
     pointer-events: none;
-    margin-left: 15px;
-    font-size: 14px;
+    margin-left: 12px;
+    font-size: 12px;
     z-index: 1000;
 }
 
 .sidebar-container.collapsed nav ul li a:hover::after {
     opacity: 1;
     visibility: visible;
+}
+
+/* New badge */
+.new-badge {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #ff4d4f;
+    border-radius: 50%;
+    margin-left: 10px;
+    box-shadow: 0 0 4px 1px rgba(255, 77, 79, 0.7);
+    animation: pulse 1.5s infinite;
+    vertical-align: middle;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 4px 1px rgba(255, 77, 79, 0.7);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+        box-shadow: 0 0 8px 3px rgba(255, 77, 79, 0.9);
+    }
+}
+
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f5f7fa;
+    z-index: 100;
+    overflow: hidden;
+}
+
+/* Content Container */
+.content-container {
+    position: absolute;
+    left: 220px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 15px;
+    transition: left 0.3s ease-in-out;
+    overflow-y: scroll;
+    height: calc(100vh - 60px);
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.content-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.dashboard-container.collapsed .content-container {
+    left: 70px;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .sidebar-container {
+        width: 70px;
+    }
+
+    .content-container {
+        left: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 0;
+    }
+
+    .content-container {
+        left: 0;
+        margin: 10px;
+        padding: 10px;
+    }
+}
+
+/* Scrollbar styling */
+.content-container::-webkit-scrollbar {
+    width: 8px;
+}
+.content-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.content-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+.content-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

@@ -2,7 +2,6 @@
 .style-admin {
   padding: 20px;
 }
-
 @media (max-width: 768px) {
   .style-admin {
     padding: 10px;
@@ -16,23 +15,21 @@
   align-items: center;
   margin-bottom: 20px;
 }
-
 .style-header h1 {
   font-size: 2rem;
 }
-
 @media (max-width: 768px) {
   .style-header {
     flex-direction: column;
     text-align: center;
     gap: 10px;
   }
-
   .style-header h1 {
     font-size: 1.5rem;
   }
 }
 
+/* Search Input */
 .style-search input {
   padding: 5px 10px;
   font-size: 1rem;
@@ -40,6 +37,7 @@
   border: 1px solid #ccc;
 }
 
+/* Add Button */
 .add-style-btn {
   padding: 10px 15px;
   background-color: #28a745;
@@ -49,11 +47,9 @@
   cursor: pointer;
   font-size: 1rem;
 }
-
 .add-style-btn:hover {
   background-color: #218838;
 }
-
 @media (max-width: 768px) {
   .add-style-btn {
     padding: 8px 12px;
@@ -61,65 +57,100 @@
   }
 }
 
-/* Table */
+/* Table Wrapper */
 .style-table {
-  overflow-x: scroll;
+  overflow-x: auto;
   max-height: 500px;
-  overflow-y: scroll;
 }
-.style-table::-webkit-scrollbar{
+.style-table::-webkit-scrollbar {
   display: none;
 }
 
+/* Table */
 .style-table table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid #110e0e;
   border-radius: 10px;
+  font-size: 0.95rem;
   overflow: hidden;
 }
 
+/* Table Cell */
 .style-table th,
 .style-table td {
   padding: 12px;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .style-table th {
   background-color: #f4f4f4;
   border-top: 2px solid #110e0e;
 }
 
-.style-table th:nth-child(3), /* Mô Tả column */
-.style-table td:nth-child(3) {
-    width: 40%; /* Decrease width of Mô Tả column slightly */
-}
-.style-table th:nth-child(2), /* Mô Tả column */
+/* Column Widths */
+.style-table th:nth-child(2),
 .style-table td:nth-child(2) {
-    width: 30%; /* Decrease width of Mô Tả column slightly */
+  width: 30%;
 }
-.style-table th:nth-child(4), /* Mô Tả column */
+.style-table th:nth-child(3),
+.style-table td:nth-child(3) {
+  width: 40%;
+}
+.style-table th:nth-child(4),
 .style-table td:nth-child(4) {
-    width:20%; /* Decrease width of Mô Tả column slightly */
+  width: 20%;
 }
 
 @media (max-width: 768px) {
   .style-table th,
   .style-table td {
     padding: 8px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    word-break: break-word;
+  }
+}
+@media (max-width: 480px) {
+  .style-table table,
+  .style-table thead,
+  .style-table tbody,
+  .style-table th,
+  .style-table td,
+  .style-table tr {
+    display: block;
+  }
+
+  .style-table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .style-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .style-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: bold;
+    text-align: left;
   }
 }
 
-/* Button Layout for Actions */
+/* Actions */
 .style-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .style-actions button {
   display: flex;
   justify-content: center;
@@ -132,55 +163,52 @@
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
 }
-
 @media (max-width: 768px) {
   .style-actions {
     justify-content: center;
     gap: 10px;
   }
-
   .style-actions button {
     width: 30px;
     height: 30px;
     font-size: 16px;
   }
 }
-
+@media (max-width: 480px) {
+  .style-actions button {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
 .icon-style {
   font-size: 18px;
 }
 
-/* Edit Button (Green) */
+/* Button Types */
 .edit-btn-style {
   background-color: #28a745;
 }
-
 .edit-btn-style:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
 }
-
-/* Delete Button (Red) */
 .delete-btn-style {
   background-color: #dc3545;
 }
-
 .delete-btn-style:hover {
   background-color: rgba(36, 221, 119, 0.1);
   transform: scale(1.1);
 }
-
-/* Active Button (Lock - Black) */
 .active-btn-style {
   background-color: #343a40;
 }
-
 .active-btn-style:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
 }
 
-/* Modal Style */
+/* Modal */
 .modal-box-style {
   margin-top: 60px;
   position: fixed;
@@ -193,21 +221,19 @@
   justify-content: center;
   align-items: center;
 }
-
 .modal-content-style {
   position: relative;
   background-color: white;
   padding: 25px;
   border-radius: 8px;
-  width: 80%; 
-  max-width: 600px; 
+  width: 80%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   box-sizing: border-box;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
-
 @media (max-width: 768px) {
   .modal-content-style {
     width: 90%;
@@ -215,18 +241,17 @@
   }
 }
 
-/* Style input, textarea, buttons */
+/* Form Elements */
 .modal-content-style input,
 .modal-content-style textarea {
-  width: 100%; 
+  width: 100%;
   padding: 12px;
   margin-bottom: 15px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
-
 @media (max-width: 768px) {
   .modal-content-style input,
   .modal-content-style textarea {
@@ -234,30 +259,38 @@
     font-size: 0.9rem;
   }
 }
+@media (max-width: 480px) {
+  .modal-content-style input,
+  .modal-content-style textarea {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
 
+/* Close Button */
 .close-btn-style {
   position: absolute;
   top: 10px;
   right: 10px;
   background: #5f666d;
-  border: none; 
+  border: none;
   cursor: pointer;
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white; 
+  color: white;
 }
 
+/* Modal Actions */
 .modal-actions-style {
   display: flex;
   justify-content: center;
 }
-
 .modal-actions-style button {
   padding: 8px 16px;
-  background-color: #28a745; /* Màu xanh lá */
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 5px;
@@ -265,14 +298,18 @@
   font-size: 0.9rem;
   margin-top: 10px;
 }
-
 .modal-actions-style button:hover {
-  background-color: #218838; /* Màu xanh lá đậm khi hover */
+  background-color: #218838;
 }
-
 @media (max-width: 768px) {
   .modal-actions-style button {
     padding: 6px 12px;
     font-size: 0.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .modal-actions-style button {
+    padding: 5px 10px;
+    font-size: 0.75rem;
   }
 }

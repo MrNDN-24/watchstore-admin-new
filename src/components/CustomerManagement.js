@@ -27,7 +27,7 @@ const CustomerManagement = () => {
   // Phân Trang
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);

@@ -117,3 +117,72 @@ input[type="password"]:focus {
 .forgot-password span:hover {
     color: #0056b3; 
 }
+
+@media (max-width: 768px) {
+  body {
+    height: auto;
+    padding: 20px;
+    align-items: flex-start;
+  }
+
+  .login-page {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .login-container {
+    width: 100%;
+    padding: 20px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  .btnLogin {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    margin-left: 0;
+  }
+
+  .role-selection {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btnLogin {
+    margin-left: 0;
+  }
+
+  .logo {
+    display: none; /* Ẩn ảnh lớn nếu có trên mobile để tiết kiệm không gian */
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  .btnLogin {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .role-selection label {
+    font-size: 14px;
+  }
+
+  .forgot-password span {
+    font-size: 13px;
+  }
+
+  .toastify {
+    font-size: 14px;
+  }
+}

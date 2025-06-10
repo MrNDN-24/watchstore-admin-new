@@ -14,7 +14,7 @@ import {
   FaPlusCircle,
   FaLock,
   FaLockOpen,
-  
+  FaImage,
 } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,7 +47,6 @@ const BrandManagement = () => {
     fetchData(currentPage);
   }, [currentPage]);
 
-
   useEffect(() => {
     fetchBrands(currentPage, itemsPerPage, search)
       .then((data) => {
@@ -57,7 +56,6 @@ const BrandManagement = () => {
       })
       .catch((error) => console.error("Lỗi khi lấy thương hiệu:", error));
   }, [currentPage, search]);
-  
 
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -78,7 +76,6 @@ const BrandManagement = () => {
 
     createBrand(formData)
       .then(() => {
-
         fetchData(currentPage);
         setNewBrand({ name: "", description: "", image: null });
         setIsModalOpen(false);
@@ -118,9 +115,10 @@ const BrandManagement = () => {
       .catch((error) => console.error("Lỗi khi cập nhật thương hiệu:", error));
   };
 
-
   const handleDeleteBrand = (id) => {
-    const isConfirmed = window.confirm("Bạn có chắc chắn muốn xóa thương hiệu này?");
+    const isConfirmed = window.confirm(
+      "Bạn có chắc chắn muốn xóa thương hiệu này?"
+    );
     if (isConfirmed) {
       deleteBrand(id)
         .then(() => {
@@ -133,7 +131,6 @@ const BrandManagement = () => {
         });
     }
   };
-
 
   const handleEditBrand = (brand) => {
     setEditingBrand(brand);
@@ -158,10 +155,9 @@ const BrandManagement = () => {
   };
 
   const handleSearchChange = (event) => {
-  setSearch(event.target.value);
-  setCurrentPage(1); // Reset về trang đầu tiên khi tìm kiếm
-};
-
+    setSearch(event.target.value);
+    setCurrentPage(1); // Reset về trang đầu tiên khi tìm kiếm
+  };
 
   // const filteredBrands = brands.filter((brand) =>
   //   brand.name.toLowerCase().includes(search.toLowerCase())
@@ -306,7 +302,18 @@ const BrandManagement = () => {
                 />
               </div>
             ) : null}
-            <input type="file" onChange={handleImageUpload} />
+            <label htmlFor="brand-image-upload" className="upload-button">
+              <FaImage className="upload-icon" />
+              Chọn ảnh
+            </label>
+            <input
+              id="brand-image-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
+
             <div className="modal-actions-brands">
               <button
                 onClick={editingBrand ? handleUpdateBrand : handleAddBrand}

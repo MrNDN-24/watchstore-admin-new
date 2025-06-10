@@ -56,7 +56,7 @@ const ActionProductManagement = () => {
         dialColor: "",
         waterResistance: "",
       });
-  
+
       // Lấy dữ liệu categories, brands, styles khi thêm mới
       Promise.all([getCategories(), fetchBrands(), getStyles()])
         .then(([categoryRes, brandRes, styleRes]) => {
@@ -92,7 +92,7 @@ const ActionProductManagement = () => {
         });
     }
   }, [action, productId]);
-  
+
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -529,6 +529,19 @@ const ActionProductManagement = () => {
   const handleGoBackAction = () => {
     navigate(`/dashboard/product-management`);
   };
+  function formatCurrency(value) {
+    const stringValue = String(value || ""); // đảm bảo là chuỗi
+    const num = stringValue.replace(/[^\d]/g, ""); // chỉ giữ lại số
+    return num.replace(/\B(?=(\d{3})+(?!\d))/g, ","); // thêm dấu phẩy
+  }
+  function formatCurrencyOrNA(value) {
+    if (value === null || value === undefined || value === "") return "N/A";
+
+    const number = parseInt(value, 10);
+    if (isNaN(number)) return "N/A";
+
+    return number.toLocaleString("vi-VN") + " VND";
+  }
 
   return (
     <div className="actionProduct">
@@ -543,11 +556,13 @@ const ActionProductManagement = () => {
             <p>{product.description}</p>
 
             <p>
-              <strong>Giá:</strong> {product.price} VND
+              <strong>Giá:</strong> {formatCurrencyOrNA(product.price)}
             </p>
             <p>
-              <strong>Giá Khuyến Mãi:</strong> {product.discount_price} VND
+              <strong>Giá Khuyến Mãi:</strong>{" "}
+              {formatCurrencyOrNA(product.discount_price)}
             </p>
+
             <p>
               <strong>Danh Mục:</strong>{" "}
               {product.category_ids?.length > 0
@@ -663,21 +678,35 @@ const ActionProductManagement = () => {
               <label htmlFor="price">Giá Sản Phẩm</label>
               <input
                 id="price"
-                type="number"
-                value={product.price}
+                type="text"
+                value={formatCurrency(product.price)}
                 onChange={(e) =>
-                  setProduct({ ...product, price: e.target.value })
+                  setProduct({
+                    ...product,
+                    price: e.target.value.replace(/[^\d]/g, ""), // Lưu là số (chuỗi)
+                  })
                 }
               />
             </div>
             <div className="inputGroup">
               <label htmlFor="discountPrice">Giá Khuyến Mãi</label>
-              <input
+              {/* <input
                 id="discountPrice"
                 type="number"
                 value={product.discount_price}
                 onChange={(e) =>
                   setProduct({ ...product, discount_price: e.target.value })
+                }
+              /> */}
+              <input
+                id="discountPrice"
+                type="text"
+                value={formatCurrency(product.discount_price)}
+                onChange={(e) =>
+                  setProduct({
+                    ...product,
+                    discount_price: e.target.value.replace(/[^\d]/g, ""), // Lưu là số (chuỗi)
+                  })
                 }
               />
             </div>

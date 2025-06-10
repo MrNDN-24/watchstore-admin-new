@@ -20,12 +20,19 @@
     bottom: 0;
     padding: 15px;
     transition: left 0.3s ease-in-out;
-    overflow-y: auto;
+    overflow-y: scroll; /* Changed to scroll */
     height: calc(100vh - 60px);
     background-color: #fff;
     border-radius: 10px;
     margin: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.content-container::-webkit-scrollbar {
+    display: none;
 }
 
 .content-container.expanded {

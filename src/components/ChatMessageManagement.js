@@ -24,7 +24,7 @@ import "../styles/StaffChat.css";
 //Socket
 import { io } from "socket.io-client";
 
-const ChatMessageManagement = () => {
+const ChatMessageManagement = ({ setHasNewSupportRequest }) => {
   const [supportQueue, setSupportQueue] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -34,6 +34,19 @@ const ChatMessageManagement = () => {
   const [customerId, setCustomerId] = useState("");
   const chatBodyRef = useRef();
   const socketRef = useRef(null);
+
+  // Sửa lại useEffect trong ChatMessageManagement
+  useEffect(() => {
+    // Reset thông báo khi vào trang chat
+    if (typeof setHasNewSupportRequest === "function") {
+      console.log("Resetting notification flag");
+      setHasNewSupportRequest(false);
+    }
+
+    return () => {
+      // Có thể thêm cleanup nếu cần
+    };
+  }, [setHasNewSupportRequest]);
 
   // Lấy thông tin nhân viên từ token
   useEffect(() => {
@@ -61,7 +74,7 @@ const ChatMessageManagement = () => {
     fetchSupportQueue();
 
     // Khởi tạo socket kết nối tới server
-    socketRef.current = io("http://localhost:5000");
+    socketRef.current = io(process.env.REACT_APP_API_SOCKET_ADMIN);
 
     // Lắng nghe event server gửi khi hàng chờ thay đổi
     socketRef.current.on("supportQueueUpdated", () => {
@@ -132,8 +145,6 @@ const ChatMessageManagement = () => {
 
     try {
       await removeFromQueue(customerId);
-      await closeConversation(conversationId);
-      // Sau khi xoá xong, cập nhật lại danh sách
       fetchSupportQueue();
     } catch (error) {
       console.error("Lỗi khi xoá khách khỏi hàng chờ:", error);
@@ -217,7 +228,7 @@ const ChatMessageManagement = () => {
               </p>
             ) : (
               supportQueue.map((item) => (
-                <div key={item.customerId} className="queue-item">
+                <div key={item.customerId._id} className="queue-item">
                   <div className="customer-info">
                     <span className="customer-name">
                       {item.customerId.name ||
@@ -238,18 +249,23 @@ const ChatMessageManagement = () => {
                     </span>
                   </div>
                   <div className="chat-actions">
-                    <button
-                      onClick={() =>
-                        acceptConversation(item.conversationId, item.customerId)
-                      }
-                      className="accept-btn"
-                      title="Nhận cuộc trò chuyện"
-                    >
-                      <span className="icon-chat">
-                        {" "}
-                        <FaUserPlus />
-                      </span>
-                    </button>
+                    {activeConversation === null && (
+                      <button
+                        onClick={() =>
+                          acceptConversation(
+                            item.conversationId,
+                            item.customerId
+                          )
+                        }
+                        className="accept-btn"
+                        title="Nhận cuộc trò chuyện"
+                      >
+                        <span className="icon-chat">
+                          <FaUserPlus />
+                        </span>
+                      </button>
+                    )}
+
                     <button
                       onClick={() =>
                         handleRemoveFromQueue(

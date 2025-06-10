@@ -13,6 +13,7 @@ import {
   FaCheckCircle,
   FaCircle,
   FaArrowLeft,
+  FaImage,
 } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,7 +31,6 @@ const ImageManagement = () => {
   const [editingImage, setEditingImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   console.log("Product ID:", productId);
-
 
   // Lấy hình ảnh của sản phẩm theo productId
   useEffect(() => {
@@ -207,12 +207,11 @@ const ImageManagement = () => {
 
   const filteredImages = images.filter(
     (image) =>
-      typeof image.description === 'string' &&
+      typeof image.description === "string" &&
       image.description.toLowerCase().includes(search.toLowerCase())
   );
-  
-  console.log(filteredImages);  // Kiểm tra kết quả sau khi lọc
-  
+
+  console.log(filteredImages); // Kiểm tra kết quả sau khi lọc
 
   const handleImageUpload = (e) => {
     setNewImage({ ...newImage, image: e.target.files[0] });
@@ -221,22 +220,30 @@ const ImageManagement = () => {
   return (
     <div className="image-admin">
       <div className="image-header">
-        <h1>Quản Lý Hình Ảnh</h1>
+        <div className="image-header__left">
+          <h1>Quản Lý Hình Ảnh</h1>
+        </div>
 
-        <input
-          type="text"
-          placeholder="Tìm kiếm..."
-          value={search}
-          className="image-search"
-          onChange={handleSearchChange}
-        />
-        <button className="add-image-btn" onClick={handleOpenModal}>
-          <FaPlusCircle /> Thêm mới
-        </button>
-        <button className="go-back-btn" onClick={handleGoBackToProduct}>
-          <FaArrowLeft /> Quay lại
-        </button>
+        <div className="image-header__center">
+          <input
+            type="text"
+            placeholder="Tìm kiếm..."
+            value={search}
+            className="image-search"
+            onChange={handleSearchChange}
+          />
+        </div>
+
+        <div className="image-header__right">
+          <button className="add-image-btn" onClick={handleOpenModal}>
+            <FaPlusCircle /> Thêm mới
+          </button>
+          <button className="go-back-btn" onClick={handleGoBackToProduct}>
+            <FaArrowLeft /> Quay lại
+          </button>
+        </div>
       </div>
+
       <div className="image-table">
         <table>
           <thead>
@@ -333,7 +340,18 @@ const ImageManagement = () => {
                 />
               </div>
             ) : null}
-            <input type="file" onChange={handleImageUpload} />
+            <label htmlFor="product-image-upload" className="upload-button">
+              <FaImage className="upload-icon" />
+              Chọn ảnh
+            </label>
+            <input
+              id="product-image-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
+
             <div className="modal-actions-images">
               <button
                 onClick={editingImage ? handleUpdateImage : handleAddImage}

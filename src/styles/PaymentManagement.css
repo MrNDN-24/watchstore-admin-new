@@ -1,0 +1,274 @@
+.payment-management {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+}
+
+.payment-management h1 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+/* Payment Table */
+.payment-table {
+  overflow-x: auto;
+  max-height: 400px; /* Reduced height */
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin-bottom: 15px;
+}
+
+.payment-table::-webkit-scrollbar {
+  display: none;
+}
+
+.payment-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #2c3e50;
+  border-radius: 8px; /* Smaller radius */
+  overflow: hidden;
+  table-layout: fixed;
+  font-size: 0.9rem; /* Smaller font */
+}
+
+.payment-table th,
+.payment-table td {
+  padding: 8px 10px; /* Reduced padding */
+  text-align: left;
+  border: 1px solid rgba(44, 62, 80, 0.15);
+  word-wrap: break-word;
+}
+
+.payment-table th {
+  background-color: #e9f0f7;
+  border-top: 2px solid #2c3e50;
+  font-weight: bold;
+  font-size: 0.85rem; /* Smaller header font */
+}
+
+/* Action Buttons */
+.payment-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px; /* Reduced gap */
+}
+
+.payment-actions button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px; /* Smaller buttons */
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  font-size: 16px; /* Smaller icon */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  border: none;
+}
+
+.icon-payment {
+  font-size: 16px; /* Smaller icon */
+}
+
+/* Seen Button */
+.seen-btn-payment {
+  background-color: #4da5e0;
+}
+
+.seen-btn-payment:hover {
+  background-color: rgba(104, 210, 224, 0.1);
+  transform: scale(1.05); /* More subtle hover effect */
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px; /* Reduced padding */
+  border-radius: 10px; /* Smaller radius */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Softer shadow */
+  width: 90%;
+  max-width: 500px; /* Smaller max width */
+  max-height: 70vh; /* Smaller height */
+  overflow-y: auto;
+  position: relative;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px); /* Smaller movement */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 1.25rem; /* Smaller heading */
+  padding-bottom: 10px; /* Less padding */
+  border-bottom: 1px solid #eee;
+}
+
+.modal-content div {
+  margin-bottom: 12px; /* Reduced spacing */
+  line-height: 1.5;
+  font-size: 0.9rem; /* Smaller text */
+}
+
+.modal-content strong {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-right: 6px; /* Reduced spacing */
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 10px; /* Closer to edge */
+  right: 10px;
+  background: #f5f5f5;
+  border: none;
+  width: 28px; /* Smaller button */
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px; /* Smaller icon */
+  color: #555;
+}
+
+.modal-close-btn:hover {
+  background: #e0e0e0;
+  color: #333;
+  transform: rotate(90deg);
+}
+
+/* Payment Filter */
+.payment-filter {
+  display: flex;
+  gap: 8px; /* Reduced gap */
+  margin-bottom: 12px; /* Reduced spacing */
+  flex-wrap: wrap;
+}
+
+.payment-filter select {
+  padding: 6px 10px; /* Smaller padding */
+  border-radius: 6px; /* Smaller radius */
+  border: 1px solid #ccc;
+  font-size: 0.85rem; /* Smaller font */
+  min-width: 150px; /* Narrower select */
+  background-color: #f9f9f9;
+}
+
+.search-input-payment {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .payment-management h1 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .payment-table {
+    max-height: 350px;
+  }
+  
+  .payment-table table {
+    font-size: 0.8rem;
+  }
+  
+  .payment-table th,
+  .payment-table td {
+    padding: 6px 8px;
+  }
+  
+  .payment-actions {
+    gap: 6px;
+  }
+  
+  .payment-actions button {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  
+  .modal-content {
+    padding: 15px;
+    max-width: 90%;
+  }
+  
+  .modal-content h2 {
+    font-size: 1.1rem;
+  }
+  
+  .modal-content div {
+    font-size: 0.85rem;
+  }
+  
+  .payment-filter select {
+    min-width: 120px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-table {
+    max-height: 300px;
+  }
+  
+  .payment-table th,
+  .payment-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .payment-table tr {
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #2c3e50;
+  }
+  
+  .payment-table th {
+    display: none;
+  }
+  
+  .payment-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: inline-block;
+    width: 120px;
+  }
+  
+  .payment-actions {
+    justify-content: flex-start;
+  }
+}

@@ -15,6 +15,7 @@ import {
   FaEye,
   FaCalendarAlt,
   FaTag,
+  FaImage,
 } from "react-icons/fa";
 import "../styles/BlogManagement.css";
 import Pagination from "../components/Pagination";
@@ -488,7 +489,20 @@ const BlogManagement = () => {
                     />
                   </div>
                 )}
-                <input type="file" onChange={handleImageUpload} />
+                <label
+                  htmlFor="blog-image-upload"
+                  className="upload-button"
+                >
+                  <FaImage className="upload-icon" />
+                  Chọn ảnh
+                </label>
+                <input
+                  id="blog-image-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ display: "none" }}
+                />
 
                 <input
                   type="date"

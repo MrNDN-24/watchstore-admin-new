@@ -202,3 +202,77 @@
 .Toastify__toast--success {
   background-color: #eaf0ec;
 }
+@media (max-width: 1024px) {
+  .profile-container {
+    width: 90%;
+  }
+
+  .profile-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .avatar {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .user-details {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 15px;
+  }
+
+  .avatar img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-actions button,
+  .password-fields button,
+  .password-actions button {
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .password-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .avatar img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .user-details div,
+  .password-fields div,
+  .input-password div {
+    margin-bottom: 12px;
+  }
+
+  .change-password h2 {
+    font-size: 1.2rem;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+  }
+
+  .profile-actions button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

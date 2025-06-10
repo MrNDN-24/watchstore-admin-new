@@ -38,11 +38,12 @@
 
 /* Table */
 .category-table {
-  overflow-x: scroll;
-  max-height: 500px;
-  overflow-y: scroll;
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
 }
-.category-table::-webkit-scrollbar{
+
+.category-table::-webkit-scrollbar {
   display: none;
 }
 
@@ -53,13 +54,15 @@
   border: 1px solid #110e0e;
   border-radius: 10px;
   overflow: hidden;
+  table-layout: fixed; /* important for consistent column width */
 }
 
 .category-table th,
 .category-table td {
-  padding: 12px;
+  padding: 8px;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
 }
 
 .category-table th {
@@ -67,23 +70,29 @@
   border-top: 2px solid #110e0e;
 }
 
-.category-table th:nth-child(3), /* Mô Tả column */
-.category-table td:nth-child(3) {
-    width: 40%; /* Decrease width of Mô Tả column slightly */
-}
-.category-table th:nth-child(2), /* Mô Tả column */
+/* Column Widths */
+.category-table th:nth-child(2),
 .category-table td:nth-child(2) {
-    width: 30%; /* Decrease width of Mô Tả column slightly */
+  width: 25%;
 }
-.category-table th:nth-child(4), /* Mô Tả column */
+
+.category-table th:nth-child(3),
+.category-table td:nth-child(3) {
+  width: 40%;
+ 
+}
+
+.category-table th:nth-child(4),
 .category-table td:nth-child(4) {
-    width: 20%; /* Decrease width of Mô Tả column slightly */
+  width: 15%;
 }
-/* Button Layout for Actions */
+
+/* Action Buttons Layout */
 .category-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
 }
 
 .category-actions button {
@@ -103,37 +112,32 @@
   font-size: 18px;
 }
 
-/* Edit Button (Green) */
+/* Button Colors */
 .edit-btn-category {
   background-color: #28a745;
 }
-
 .edit-btn-category:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
 }
 
-/* Delete Button (Red) */
 .delete-btn-category {
   background-color: #dc3545;
 }
-
 .delete-btn-category:hover {
   background-color: rgba(36, 221, 119, 0.1);
   transform: scale(1.1);
 }
 
-/* Active Button (Lock - Black) */
 .active-btn-category {
   background-color: #343a40;
 }
-
 .active-btn-category:hover {
   background-color: rgba(0, 0, 0, 0.1);
   transform: scale(1.1);
 }
 
-/* Modal Category */
+/* Modal */
 .modal-box-category {
   margin-top: 60px;
   position: fixed;
@@ -152,25 +156,24 @@
   background-color: white;
   padding: 25px;
   border-radius: 8px;
-  width: 80%; 
-  max-width: 600px; 
+  width: 80%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   box-sizing: border-box;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
-/* Inputs, Textarea, Buttons */
 .modal-content-category input,
 .modal-content-category textarea {
-  width: 100%; 
+  width: 100%;
   padding: 12px;
   margin-bottom: 15px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 .close-btn-category {
@@ -178,14 +181,14 @@
   top: 10px;
   right: 10px;
   background: #5f666d;
-  border: none; 
+  border: none;
   cursor: pointer;
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white; 
+  color: white;
 }
 
 .modal-actions-category {
@@ -195,7 +198,7 @@
 
 .modal-actions-category button {
   padding: 8px 16px;
-  background-color: #28a745; /* Green */
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 5px;
@@ -210,45 +213,63 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  /* Adjust Header for Small Screens */
   .category-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
 
-  /* Make Heading Smaller */
   .category-header h1 {
     font-size: 1.5rem;
   }
 
-  /* Adjust Table for Mobile */
-  .category-table table,
   .category-table th,
   .category-table td {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    padding: 6px;
   }
 
-  /* Adjust Modal Size */
   .modal-content-category {
     width: 95%;
     padding: 15px;
   }
 
-  /* Button Adjustments */
   .add-category-btn {
     font-size: 0.9rem;
     padding: 8px 12px;
   }
 
-  /* Input Adjustments */
   .category-search input {
     font-size: 0.9rem;
     padding: 4px 8px;
   }
 
-  /* Center Action Buttons */
   .category-actions {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .category-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .category-table th,
+  .category-table td {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .add-category-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .category-actions button {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
   }
 }

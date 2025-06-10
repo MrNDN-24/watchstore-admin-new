@@ -25,7 +25,7 @@ const CategoryManagement = () => {
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 5; // Số lượng danh mục mỗi trang
+  const itemsPerPage = 6; // Số lượng danh mục mỗi trang
 
   const [search, setSearch] = useState("");
   const fetchData = (page) => {

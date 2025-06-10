@@ -1,6 +1,6 @@
 /* Overall Layout */
 .blog-admin {
-  padding: 20px;
+  padding: 15px;
 }
 
 /* Header */
@@ -8,40 +8,46 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .blog-header h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .blog-search input {
-  padding: 5px 10px;
-  font-size: 1rem;
-  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border-radius: 4px;
   border: 1px solid #ccc;
+  min-width: 150px;
 }
 
 .add-blog-btn {
-  padding: 10px 15px;
+  padding: 8px 12px;
   background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: background-color 0.3s;
+  white-space: nowrap;
 }
 
 .add-blog-btn:hover {
-  background-color: #0056b3;
+  background-color: #218838;
 }
 
 /* Table */
 .blog-table {
-  overflow-x: scroll;
-  max-height: 500px;
-  overflow-y: scroll;
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .blog-table::-webkit-scrollbar {
@@ -53,15 +59,17 @@
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid #2c3e50;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
+  min-width: 600px;
 }
 
 .blog-table th,
 .blog-table td {
-  padding: 12px;
+  padding: 8px 10px;
   text-align: center;
   border: 1px solid rgba(44, 62, 80, 0.15);
+  font-size: 0.9rem;
 }
 
 .blog-table th {
@@ -69,81 +77,74 @@
   border-top: 2px solid #2c3e50;
 }
 
-
-
-  .blog-table th:nth-child(1),
+.blog-table th:nth-child(1),
 .blog-table td:nth-child(1) {
-    width: 40%; 
+  width: 40%; 
 }
- .blog-table th:nth-child(2),
+
+.blog-table th:nth-child(2),
 .blog-table td:nth-child(2) {
-    width: 15%; 
+  width: 15%; 
 }
 
+/* Button Layout for Actions */
+.blog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
 
- /* Button Layout for Actions */
-  .blog-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .blog-actions button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  .icon-blog{
-    font-size: 18px;
-  }
-  
+.blog-actions button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  border: none;
+}
 
-  /* Seen button */
+.icon-blog {
+  font-size: 16px;
+}
 
-  .seen-btn-blog{
-    background-color: #4da5e0;
-  }
-  .seen-btn-blog:hover{
-    background-color: rgba(104, 210, 224, 0.1);
-    transform: scale(1.1);
-  }
-  /* Edit Button (Green) */
-  .edit-btn-blog {
-    background-color: #28a745;
-  }
-  
-  .edit-btn-blog:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
-  }
-  
-  /* Delete Button (Red) */
-  .delete-btn-blog {
-    background-color: #dc3545;
-  }
-  
-  .delete-btn-blog:hover {
-    background-color: rgba(36, 221, 119, 0.1);
-    transform: scale(1.1);
-  }
-  
-  /* Active Button (Lock - Black) */
-  .active-btn-blog {
-    background-color: #343a40;
-  }
-  
-  .active-btn-blog:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
-  }
+/* Button Colors */
+.seen-btn-blog {
+  background-color: #4da5e0;
+}
+.seen-btn-blog:hover {
+  background-color: #3a8bc8;
+  transform: scale(1.1);
+}
+
+.edit-btn-blog {
+  background-color: #28a745;
+}
+.edit-btn-blog:hover {
+  background-color: #218838;
+  transform: scale(1.1);
+}
+
+.delete-btn-blog {
+  background-color: #dc3545;
+}
+.delete-btn-blog:hover {
+  background-color: #c82333;
+  transform: scale(1.1);
+}
+
+.active-btn-blog {
+  background-color: #343a40;
+}
+.active-btn-blog:hover {
+  background-color: #23272b;
+  transform: scale(1.1);
+}
 
 /* Modal blog */
 .modal-box-blog {
@@ -152,21 +153,22 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1100;
+  padding: 15px;
 }
 
 .modal-content-blog {
   position: relative;
   background-color: white;
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 1200px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
   max-height: 90vh;
   overflow-y: auto;
   display: flex;
@@ -175,10 +177,9 @@
 
 .modal-content-blog h2 {
   color: #2c3e50;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
   text-align: center;
-  margin-top: 12px;
 }
 
 /* Inputs, Textarea, Buttons */
@@ -186,11 +187,11 @@
 .modal-content-blog textarea,
 .modal-content-blog select {
   width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  font-size: 16px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 4px;
   box-sizing: border-box;
   transition: border-color 0.3s;
 }
@@ -205,19 +206,19 @@
 
 .close-btn-blog {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
   background: #2c3e50;
   border: none;
   cursor: pointer;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 16px;
   transition: background 0.3s;
 }
 
@@ -228,53 +229,53 @@
 /* Layout inside modal */
 .modal-form-blog {
   display: flex;
-  gap: 30px;
+  gap: 20px;
   flex-wrap: wrap;
   flex-grow: 1;
 }
 
 /* Left form (inputs and image upload) */
 .modal-form-left-blog {
-  flex: 0.7;
-  min-width: 250px;
+  flex: 1;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 /* Preview image styling */
 .modal-form-left-blog .image-preview {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   max-width: 100%;
-  max-height: 150px;
-  border-radius: 8px;
+  max-height: 120px;
+  border-radius: 6px;
   object-fit: cover;
   border: 1px solid #ccc;
 }
 
 /* Right form (TinyMCE editor) */
 .modal-form-right-blog {
-  flex: 1.5;
-  min-width: 350px;
+  flex: 2;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
 }
 
 /* Buttons container */
 .modal-btn-blog {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
 }
 
 .modal-btn-blog button {
-  padding: 12px 30px;
+  padding: 10px 20px;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   transition: background-color 0.3s;
 }
@@ -283,190 +284,137 @@
   background-color: #0056b3;
 }
 
-
-
-
 /* Blog Content View Modal */
 .modal-content-blog .blog-content {
-  padding: 20px;
-  line-height: 1.8;
+  padding: 15px;
+  line-height: 1.6;
   color: #333;
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
 .modal-content-blog .blog-content h1,
 .modal-content-blog .blog-content h2,
 .modal-content-blog .blog-content h3 {
   color: #2c3e50;
-  margin: 1.5em 0 0.8em;
-  font-weight: 600;
+  margin: 1em 0 0.5em;
 }
 
 .modal-content-blog .blog-content h1 {
-  font-size: 2rem;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
+  font-size: 1.5rem;
 }
 
 .modal-content-blog .blog-content h2 {
-  font-size: 1.7rem;
+  font-size: 1.3rem;
 }
 
 .modal-content-blog .blog-content h3 {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 }
 
 .modal-content-blog .blog-content p {
-  margin-bottom: 1.5em;
-  font-size: 1.1rem;
+  margin-bottom: 1em;
+  font-size: 0.95rem;
 }
 
 .modal-content-blog .blog-content img {
   max-width: 100%;
   height: auto;
-  display: block;
-  margin: 20px auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  border-radius: 6px;
 }
-
-.modal-content-blog .blog-content a {
-  color: #3498db;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.modal-content-blog .blog-content a:hover {
-  color: #2980b9;
-  text-decoration: underline;
-}
-
-.modal-content-blog .blog-content ul,
-.modal-content-blog .blog-content ol {
-  margin: 1.5em 0;
-  padding-left: 2em;
-}
-
-.modal-content-blog .blog-content li {
-  margin-bottom: 0.8em;
-}
-
-.modal-content-blog .blog-content blockquote {
-  border-left: 4px solid #3498db;
-  background-color: #f8f9fa;
-  padding: 15px 20px;
-  margin: 20px 0;
-  font-style: italic;
-  color: #555;
-}
-
-.modal-content-blog .blog-content pre {
-  background-color: #f5f5f5;
-  padding: 15px;
-  border-radius: 5px;
-  overflow-x: auto;
-  margin: 20px 0;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.modal-content-blog .blog-content code {
-  background-color: #f5f5f5;
-  padding: 2px 5px;
-  border-radius: 3px;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.modal-content-blog .blog-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.modal-content-blog .blog-content table th,
-.modal-content-blog .blog-content table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-.modal-content-blog .blog-content table th {
-  background-color: #f2f2f2;
-}
-
-/* Blog metadata */
-.blog-meta {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.blog-meta span {
-  display: flex;
+.upload-button {
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #2d5f8a, #348084);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 162, 255, 0.3);
+  transition: all 0.3s ease;
+  border: none;
+  font-size: 14px;
 }
 
-/* Featured image */
-.blog-featured-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.upload-button:hover {
+  background: linear-gradient(135deg, #3ea1f5, #00c6ff);
+  box-shadow: 0 6px 16px rgba(0, 162, 255, 0.45);
+  transform: translateY(-2px);
 }
+
+.upload-icon {
+  font-size: 18px;
+  color: white;
+  margin-top: 1px; /* nhẹ nhẹ để cân giữa chữ */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  /* Adjust Header for Small Screens */
   .blog-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
   }
-
-  /* Make Heading Smaller */
-  .blog-header h1 {
-    font-size: 1.5rem;
+  
+  .blog-search {
+    width: 100%;
   }
-
-  /* Adjust Table for Mobile */
-  .blog-table table,
-  .blog-table th,
-  .blog-table td {
-    font-size: 0.9rem;
+  
+  .blog-search input {
+    width: 100%;
   }
-
-  /* Adjust Modal Size */
+  
+  .blog-table table {
+    min-width: 100%;
+  }
+  
   .modal-content-blog {
-    width: 95%;
     padding: 15px;
   }
-
-  /* Button Adjustments */
-  .add-blog-btn {
-    font-size: 0.9rem;
-    padding: 8px 12px;
-  }
-
-  /* Input Adjustments */
-  .blog-search input {
-    font-size: 0.9rem;
-    padding: 4px 8px;
-  }
-
-  /* Stack modal form columns */
+  
   .modal-form-blog {
     flex-direction: column;
+    gap: 15px;
   }
-
+  
   .modal-form-left-blog,
   .modal-form-right-blog {
     flex: none;
-    min-width: 100%;
+    width: 100%;
+  }
+  
+  .blog-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-admin {
+    padding: 10px;
+  }
+  
+  .blog-table th,
+  .blog-table td {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+  
+  .blog-actions button {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+  }
+  
+  .modal-content-blog {
+    padding: 12px;
+  }
+  
+  .modal-content-blog h2 {
+    font-size: 1.3rem;
   }
 }

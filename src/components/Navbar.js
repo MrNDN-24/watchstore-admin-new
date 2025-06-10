@@ -39,9 +39,9 @@ const Navbar = () => {
         <h1>WatchThis</h1>
         <div className="navbar-links">
           {/* Notification */}
-          <button className="navbar-link notify-btn">
+          {/* <button className="navbar-link notify-btn">
             <FaRegBell />
-          </button>
+          </button> */}
           {/* Avatar + Dropdown */}
           <div className="avatar-dropdown">
             <img

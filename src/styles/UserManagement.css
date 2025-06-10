@@ -1,224 +1,290 @@
 /* user Management Container */
 .user-admin {
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  /* user Header */
-  .user-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .user-header h1 {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  .user-search {
-    padding: 10px;
-    width: 200px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .add-user-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .add-user-btn:hover {
-    background-color: #218838;
-  }
-  
- /* Table */
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* user Header */
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-header h1 {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.user-search {
+  padding: 8px;
+  width: 180px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-user-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-user-btn:hover {
+  background-color: #218838;
+}
+
+/* Table */
 .user-table {
-    overflow-x: scroll;
-    max-height: 500px;
-    overflow-y: scroll;
+  overflow-x: auto;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 .user-table::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .user-table table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid #110e0e;
-    border-radius: 10px;
-    overflow: hidden;
+  width: 100%;
+  min-width: 600px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #110e0e;
+  border-radius: 10px;
+  overflow: hidden;
 }
-
 .user-table th,
 .user-table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 14px;
 }
-
-
-
 .user-table th {
-    background-color: #f4f4f4;
-    border-top: 2px solid #110e0e;
+  background-color: #f4f4f4;
+  border-top: 2px solid #110e0e;
 }
 
 /* Button Layout for Actions */
 .user-actions {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .user-actions button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .icon-user {
-    font-size: 18px;
+  font-size: 18px;
 }
-/* Seen Button (Green) */
+
+/* Seen Button */
 .seen-btn-user {
-    background-color: #24bfd6;
+  background-color: #24bfd6;
 }
-
 .seen-btn-user:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
-/* Edit Button (Green) */
+
+/* Edit Button */
 .edit-btn-user {
-    background-color: #28a745;
+  background-color: #28a745;
 }
-
 .edit-btn-user:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
-/* Delete Button (Red) */
+/* Delete Button */
 .delete-btn-user {
-    background-color: #dc3545;
+  background-color: #dc3545;
 }
-
 .delete-btn-user:hover {
-    background-color: rgba(36, 221, 119, 0.1);
-    transform: scale(1.1);
+  background-color: rgba(36, 221, 119, 0.1);
+  transform: scale(1.1);
 }
 
-/* Active Button (Lock - Black) */
+/* Active Button */
 .active-btn-user {
-    background-color: #343a40;
+  background-color: #343a40;
 }
-
 .active-btn-user:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
 
 /* Image Button */
-.image-btn-user{
-    background-color: cadetblue;
+.image-btn-user {
+  background-color: cadetblue;
 }
-.image-btn-user:hover{
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
+.image-btn-user:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
 }
-  /* Modal Styling */
+
+/* Modal Styling */
 .user-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
 }
 
 .user-modal-content {
-    border-color: #110e0e;
-    border-width: 2px;
-    margin-top: 50px;
-    position: relative;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    width: 500px; 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow-y: scroll;
-    max-height: 600px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: slideDownFade 0.3s ease;
 }
-.user-modal-content::-webkit-scrollbar {
-    display: none;
-}
-.user-modal-content h2{
-    font-size: 30px;
-    font-style:bold;
+@keyframes slideDownFade {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
+.user-modal-content::-webkit-scrollbar {
+  display: none;
+}
+.user-modal-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
 
 .user-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-.close-btn-user{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #5f666d;
-    border: none; 
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white; 
+
+.close-btn-user {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #5f666d;
+  border: none; 
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; 
 }
 
 .user-form-group input,
 .user-form-group select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    width: 400px;
-    box-sizing: border-box;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .user-submit-btn {
-padding: 10px 15px;
+  padding: 8px 12px;
   background-color: #28a745;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-top: 20px;
 }
-
-.user-submit-btn:hover{
-    background-color: #218838;
+.user-submit-btn:hover {
+  background-color: #218838;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .user-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .user-search {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .add-user-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .user-modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .user-form-group input,
+  .user-form-group select {
+    width: 100%;
+  }
+
+  .user-submit-btn {
+    width: 100%;
+  }
+
+  .user-actions {
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .user-actions button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .icon-user {
+    font-size: 16px;
+  }
+
+  .user-table th,
+  .user-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .user-modal-content h2 {
+    font-size: 20px;
+  }
+}

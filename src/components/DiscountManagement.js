@@ -13,6 +13,7 @@ import {
   FaLockOpen,
   FaLock,
   FaEye,
+  FaImage,
 } from "react-icons/fa";
 import "../styles/DiscountManagement.css";
 import Pagination from "../components/Pagination";
@@ -678,7 +679,17 @@ const DiscountManagement = () => {
                   </div>
                 ) : null}
 
-                <input type="file" onChange={handleImageUpload} />
+                <label htmlFor="discount-image-upload" className="upload-button">
+                              <FaImage className="upload-icon" />
+                              Chọn ảnh
+                            </label>
+                            <input
+                              id="discount-image-upload"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                              style={{ display: "none" }}
+                            />
                 <label>Số tiền giảm:</label>
                 <input
                   type="number"

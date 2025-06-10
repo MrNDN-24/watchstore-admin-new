@@ -1,90 +1,127 @@
+/* Container */
 .top-product-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 80vh;
-    overflow-y: auto;
-    position: relative; 
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  background-color: #f9fafb;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  border-radius: 12px;
 }
-.top-product-container::-webkit-scrollbar{
-    display: none;
+.top-product-container::-webkit-scrollbar {
+  display: none;
 }
+
 .buttonPDF-product {
-    padding: 10px 20px;  
-    font-size: 1.2rem;   
-    background-color: #4875a8; 
-    color: white; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    transition: background-color 0.3s ease; 
-    width: auto;
+  padding: 8px 14px; /* nhỏ gọn theo text */
+  font-size: 1rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: fit-content; /* quan trọng để khít nội dung */
+  white-space: nowrap; /* tránh text bị xuống dòng */
 }
 
 .buttonPDF-product:hover {
-    background-color: #1a96df; 
+  background-color: #2563eb;
 }
 
+/* Title */
 .top-product-title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
+/* Chart Container */
 .top-product-chart-container {
-    width: 80%;
-    margin: 0 auto;
+  width: 90%;
+  margin: 0 auto 40px auto;
+  display: flex;
+  justify-content: center;
 }
 
+/* Table Section */
 .top-product-table-container {
-    margin-top: 70px;
+  margin-top: 40px;
 }
-
 .top-product-table-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #374151;
 }
 
+/* Table Style */
 .top-product-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid #110e0e;
-    border-radius: 10px;
-    overflow: hidden;
-    table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  overflow: hidden;
+  table-layout: auto;
+  background-color: white;
 }
-
 .top-product-table th,
 .top-product-table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: break-word;
-    height: auto;
+  padding: 14px 12px;
+  text-align: center;
+  font-size: 15px;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  word-break: break-word;
 }
-
 .top-product-table th {
-    background-color: #f4f4f4;
-    border-top: 2px solid #110e0e;
+  background-color: #f3f4f6;
+  font-weight: 600;
+  border-top: 2px solid #111827;
 }
 
-.top-product-table td {
-    background-color: #ffffff;
-}
-
+/* Responsive */
 @media (max-width: 768px) {
-    .top-product-chart-container {
-        width: 100%;
-    }
-    .top-product-table {
-        font-size: 14px;
-    }
+  .buttonPDF-product {
+    position: static;
+    display: block;
+    margin: 0 auto 20px auto;
+  
+  }
+
+  .top-product-title {
+    font-size: 1.5rem;
+  }
+
+  .top-product-table-title {
+    font-size: 1.125rem;
+  }
+
+  .top-product-chart-container {
+    width: 100%;
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  .top-product-table th,
+  .top-product-table td {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .top-product-table {
+    overflow-x: auto;
+    display: block;
+  }
 }

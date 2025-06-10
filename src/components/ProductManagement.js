@@ -25,7 +25,7 @@ const ProductManagement = () => {
   //Xử lí phân trang
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 5;
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);

@@ -1,48 +1,49 @@
 .activity-management {
-  padding: 20px;
+  padding: 12px;
   font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 
 .activity-management h1 {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 /* Search Filter */
 .filter-search {
   position: relative;
-  margin: 0 auto 25px;
+  margin: 0 auto 20px;
   width: 100%;
-  max-width: 350px;
+  max-width: 320px;
   display: flex;
   justify-content: center;
 }
 
 .filter-search input {
   width: 100%;
-  padding: 12px 20px 12px 45px;
+  padding: 10px 15px 10px 38px;
   border: 2px solid #e0e0e0;
   border-radius: 30px;
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   background-color: #f9f9f9;
   color: #333;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
 }
 
 .filter-search input:focus {
   outline: none;
   border-color: #4da5e0;
   background-color: #fff;
-  box-shadow: 0 2px 15px rgba(77, 165, 224, 0.2);
+  box-shadow: 0 2px 12px rgba(77, 165, 224, 0.15);
 }
 
 .filter-search::before {
   content: "🔍";
   position: absolute;
-  left: 15px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 13px;
   color: #888;
 }
 
@@ -59,7 +60,6 @@
 .activity-table {
   overflow-x: auto;
   max-height: 500px;
-  overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -80,10 +80,11 @@
 
 .activity-table th,
 .activity-table td {
-  padding: 12px;
+  padding: 10px;
   text-align: left;
-  border: 1px solid rgba(44, 62, 80, 0.15);
+  border: 1px solid rgba(44, 62, 80, 0.1);
   word-wrap: break-word;
+  font-size: 13px;
 }
 
 .activity-table th {
@@ -94,38 +95,20 @@
 
 /* Column Widths */
 .activity-table th:nth-child(1),
-.activity-table td:nth-child(1) {
-  width: 120px; /* Mã */
-}
-
+.activity-table td:nth-child(1) { width: 100px; }
 .activity-table th:nth-child(2),
-.activity-table td:nth-child(2) {
-  width: 150px; /* Người dùng */
-}
-
+.activity-table td:nth-child(2) { width: 130px; }
 .activity-table th:nth-child(3),
-.activity-table td:nth-child(3) {
-  width: 150px; /* Loại hoạt động */
-}
-
+.activity-table td:nth-child(3) { width: 130px; }
 .activity-table th:nth-child(4),
-.activity-table td:nth-child(4) {
-  width: 150px; /* Đối tượng */
-}
-
+.activity-table td:nth-child(4) { width: 130px; }
 .activity-table th:nth-child(5),
-.activity-table td:nth-child(5) {
-  width: 250px; /* Mô tả */
-}
-
+.activity-table td:nth-child(5) { width: 200px; }
 .activity-table th:nth-child(6),
-.activity-table td:nth-child(6) {
-  width: 180px; /* Thời gian */
-}
-
+.activity-table td:nth-child(6) { width: 150px; }
 .activity-table th:nth-child(7),
 .activity-table td:nth-child(7) {
-  width: 100px; /* Hành động */
+  width: 90px;
   text-align: center;
 }
 
@@ -133,42 +116,38 @@
 .activity-actions {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .activity-actions button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.2s;
   border: none;
 }
 
 .icon-activity {
-  font-size: 18px;
+  font-size: 16px;
 }
 
-/* Seen Button */
 .seen-btn-activity {
   background-color: #4da5e0;
 }
-
 .seen-btn-activity:hover {
   background-color: rgba(104, 210, 224, 0.1);
   transform: scale(1.1);
 }
 
-/* Delete Button */
 .delete-btn-activity {
   background-color: #dc3545;
 }
-
 .delete-btn-activity:hover {
   background-color: rgba(220, 53, 69, 0.8);
   transform: scale(1.1);
@@ -177,10 +156,8 @@
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -191,15 +168,15 @@
 
 .modal-content {
   background-color: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.15);
   width: 90%;
-  max-width: 600px;
+  max-width: 540px;
   max-height: 80vh;
   overflow-y: auto;
-  position: relative;
   animation: modalFadeIn 0.3s ease-out;
+  position: relative;
 }
 
 @keyframes modalFadeIn {
@@ -216,86 +193,139 @@
 .modal-content h2 {
   margin-top: 0;
   color: #2c3e50;
-  font-size: 24px;
-  padding-bottom: 15px;
+  font-size: 20px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #eee;
 }
 
 .modal-content div {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .modal-content strong {
   color: #2c3e50;
   font-weight: 600;
-  margin-right: 8px;
+  margin-right: 6px;
 }
 
 .modal-close-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 12px;
+  right: 12px;
   background: #f5f5f5;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s;
-  font-size: 16px;
+  font-size: 14px;
   color: #555;
 }
-
 .modal-close-btn:hover {
   background: #e0e0e0;
   color: #333;
   transform: rotate(90deg);
 }
 
-/* Responsive Adjustments */
+/* Responsive */
 @media (max-width: 768px) {
   .filter-search {
     max-width: 100%;
   }
-  
+
   .filter-search input {
-    padding: 10px 15px 10px 40px;
+    padding: 9px 12px 9px 36px;
+    font-size: 12px;
   }
-  
+
   .filter-search::before {
-    left: 12px;
-    font-size: 14px;
+    font-size: 12px;
+    left: 10px;
   }
-  
+
   .modal-content {
     width: 95%;
-    padding: 20px;
+    padding: 18px;
   }
-  
+
   .modal-content h2 {
-    font-size: 20px;
+    font-size: 18px;
   }
-  
+
   .modal-content div {
-    font-size: 14px;
+    font-size: 13px;
   }
-  
-  /* Adjust column widths for mobile */
-  .activity-table th:nth-child(n),
-  .activity-table td:nth-child(n) {
-    width: auto;
-    display: block;
-    text-align: left;
-  }
-  
+
+  /* Bảng dạng khối (mobile-friendly) */
+  .activity-table table,
+  .activity-table thead,
+  .activity-table tbody,
+  .activity-table th,
+  .activity-table td,
   .activity-table tr {
     display: block;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #2c3e50;
+    width: 100%;
+  }
+
+  .activity-table tr {
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .activity-table th {
+    display: none;
+  }
+
+  .activity-table td {
+    position: relative;
+    padding-left: 50%;
+    font-size: 13px;
+    min-height: 30px;
+  }
+
+  .activity-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .activity-actions {
+    justify-content: start;
+  }
+
+  .activity-actions button {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-management {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .modal-content {
+    padding: 16px;
+  }
+
+  .modal-close-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
   }
 }

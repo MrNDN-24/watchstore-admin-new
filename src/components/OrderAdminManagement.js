@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { getOrders, updateOrderStatus } from "../services/orderServicesAdmin";
 import { getCustomerById } from "../services/customerServicesAdmin";
 import { useNavigate } from "react-router-dom";
@@ -18,54 +18,54 @@ const OrderAdminManagement = () => {
   const [status, setStatus] = useState("Chờ xử lý");
   const [dateFilter, setDateFilter] = useState("all");
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const navigate = useNavigate();
   const goToOderDetailManagement = (orderId) => {
-    console.log('Navigating to order details with ID:', orderId);
+    console.log("Navigating to order details with ID:", orderId);
     navigate(`/dashboard/orderdetail-management/${orderId}`);
   };
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 4; 
+  const itemsPerPage = 5;
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
 
+  const fetchOrders = useCallback(
+    async (page) => {
+      try {
+        const data = await getOrders(status, dateFilter, page, itemsPerPage);
+        const ordersWithUserDetails = await Promise.all(
+          data.orders.map(async (order) => {
+            const customerId = order.user_id;
+            const userData = await getCustomerById(customerId);
+            return {
+              ...order,
+              user_name: userData.name,
+            };
+          })
+        );
 
+        setOrders(ordersWithUserDetails);
+        setFilteredOrders(ordersWithUserDetails);
+        setTotalPages(data.totalPages);
+        setCurrentPage(data.currentPage);
+        setLoading(false);
+      } catch (error) {
+        console.error("Lỗi khi lấy đơn hàng:", error);
+        setLoading(false);
+      }
+    },
+    [status, dateFilter, itemsPerPage]
+  ); // Chỉ cập nhật lại fetchOrders khi status, dateFilter hoặc itemsPerPage thay đổi
 
-  const fetchOrders = useCallback(async (page) => {
-    try {
-      const data = await getOrders(status, dateFilter, page, itemsPerPage); 
-      const ordersWithUserDetails = await Promise.all(
-        data.orders.map(async (order) => {
-          const customerId = order.user_id; 
-          const userData = await getCustomerById(customerId); 
-          return {
-            ...order,
-            user_name: userData.name, 
-          };
-        })
-      );
-  
-      setOrders(ordersWithUserDetails);
-      setFilteredOrders(ordersWithUserDetails);
-      setTotalPages(data.totalPages); 
-      setCurrentPage(data.currentPage); 
-      setLoading(false);
-    } catch (error) {
-      console.error("Lỗi khi lấy đơn hàng:", error);
-      setLoading(false);
-    }
-  }, [status, dateFilter, itemsPerPage]); // Chỉ cập nhật lại fetchOrders khi status, dateFilter hoặc itemsPerPage thay đổi
-  
   useEffect(() => {
-    fetchOrders(currentPage); 
+    fetchOrders(currentPage);
   }, [currentPage, fetchOrders]); // Chỉ cần fetchOrders và currentPage là dependencies
-  
-  
 
   const handleStatusChange = (status) => {
     setStatus(status);
@@ -81,23 +81,26 @@ const OrderAdminManagement = () => {
     const isConfirmed = window.confirm(
       `Bạn có chắc chắn muốn cập nhật trạng thái đơn hàng thành "${newStatus}" không?`
     );
-  
+
     if (isConfirmed) {
       try {
         await updateOrderStatus(orderId, newStatus);
         const updatedOrders = orders.map((order) =>
-          order._id === orderId ? { ...order, deliveryStatus: newStatus } : order
+          order._id === orderId
+            ? { ...order, deliveryStatus: newStatus }
+            : order
         );
         fetchOrders(currentPage);
         setFilteredOrders(updatedOrders);
-        toast.success(`Trạng thái đơn hàng đã được cập nhật thành "${newStatus}"!`);
+        toast.success(
+          `Trạng thái đơn hàng đã được cập nhật thành "${newStatus}"!`
+        );
       } catch (error) {
         console.error("Lỗi khi cập nhật trạng thái đơn hàng:", error);
         toast.error("Đã xảy ra lỗi khi cập nhật trạng thái đơn hàng.");
       }
     }
   };
-  
 
   const renderActionButtons = (order) => {
     switch (order.deliveryStatus) {
@@ -120,7 +123,10 @@ const OrderAdminManagement = () => {
                 <FaTimesCircle />
               </span>
             </button>
-            <button className="order-details" onClick={() => goToOderDetailManagement(order._id)}>
+            <button
+              className="order-details"
+              onClick={() => goToOderDetailManagement(order._id)}
+            >
               <span className="icon-order">
                 <FaEye />
               </span>
@@ -138,7 +144,10 @@ const OrderAdminManagement = () => {
                 <FaShippingFast />
               </span>
             </button>
-            <button className="order-details" onClick={() => goToOderDetailManagement(order._id)}>
+            <button
+              className="order-details"
+              onClick={() => goToOderDetailManagement(order._id)}
+            >
               <span className="icon-order">
                 <FaEye />
               </span>
@@ -156,7 +165,10 @@ const OrderAdminManagement = () => {
                 <FaCheck />
               </span>
             </button>
-            <button className="order-details" onClick={() => goToOderDetailManagement(order._id)}>
+            <button
+              className="order-details"
+              onClick={() => goToOderDetailManagement(order._id)}
+            >
               <span className="icon-order">
                 <FaEye />
               </span>
@@ -166,7 +178,10 @@ const OrderAdminManagement = () => {
       case "Đã giao":
         return (
           <div className="order-button-actions">
-            <button className="order-details" onClick={() => goToOderDetailManagement(order._id)}>
+            <button
+              className="order-details"
+              onClick={() => goToOderDetailManagement(order._id)}
+            >
               <span className="icon-order">
                 <FaEye />
               </span>
@@ -176,7 +191,10 @@ const OrderAdminManagement = () => {
       default:
         return (
           <div className="order-button-actions">
-            <button className="order-details" onClick={() => goToOderDetailManagement(order._id)}>
+            <button
+              className="order-details"
+              onClick={() => goToOderDetailManagement(order._id)}
+            >
               <span className="icon-order">
                 <FaEye />
               </span>
@@ -189,7 +207,18 @@ const OrderAdminManagement = () => {
   return (
     <div className="order-management-wrapper">
       <div className="order-header">
-        <h1>Quản lý Đơn hàng</h1>
+        <h1>Quản Lý Đơn hàng</h1>
+         <div className="search-input-order">
+          <input
+            type="text"
+            placeholder="Tìm kiếm..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+          />
+        </div>
         <div className="order-status-filter">
           <div className="status-buttons">
             <button
@@ -199,13 +228,17 @@ const OrderAdminManagement = () => {
               Chờ xử lý
             </button>
             <button
-              className={`status-btn ${status === "Đã xác nhận" ? "active" : ""}`}
+              className={`status-btn ${
+                status === "Đã xác nhận" ? "active" : ""
+              }`}
               onClick={() => handleStatusChange("Đã xác nhận")}
             >
               Đã xác nhận
             </button>
             <button
-              className={`status-btn ${status === "Đang vận chuyển" ? "active" : ""}`}
+              className={`status-btn ${
+                status === "Đang vận chuyển" ? "active" : ""
+              }`}
               onClick={() => handleStatusChange("Đang vận chuyển")}
             >
               Đang vận chuyển
@@ -224,6 +257,7 @@ const OrderAdminManagement = () => {
             </button>
           </div>
         </div>
+       
 
         <div className="date-filter">
           <label>
@@ -271,7 +305,12 @@ const OrderAdminManagement = () => {
                 <td colSpan="6">Không có đơn hàng</td>
               </tr>
             ) : (
-              filteredOrders.map((order) => (
+              filteredOrders.filter((order) => {
+                  const keyword = searchTerm.toLowerCase();
+                  return (
+                    order._id?.toLowerCase().includes(keyword)       
+                  );
+                }).map((order) => (
                 <tr key={order._id}>
                   <td>{order._id?.slice(0, 10) || "-"}</td>
                   <td>{order.user_name}</td>
@@ -290,7 +329,7 @@ const OrderAdminManagement = () => {
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-       <ToastContainer />
+      <ToastContainer />
     </div>
   );
 };

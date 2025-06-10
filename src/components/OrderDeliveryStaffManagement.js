@@ -16,7 +16,7 @@ const OrderDeliveryStaffManagement = () => {
   const [status, setStatus] = useState("Chờ xử lý");
   const [dateFilter, setDateFilter] = useState("all");
   const [loading, setLoading] = useState(true);
-
+const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const goToOderDetailManagement = (orderId) => {
     console.log('Navigating to order details with ID:', orderId);
@@ -171,7 +171,18 @@ const OrderDeliveryStaffManagement = () => {
   return (
     <div className="order-management-wrapper">
       <div className="order-header">
-        <h1>Quản lý Đơn hàng</h1>
+        <h1>Quản Lý Đơn hàng</h1>
+         <div className="search-input-order">
+          <input
+            type="text"
+            placeholder="Tìm kiếm..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+          />
+        </div>
         <div className="order-status-filter">
           <div className="status-buttons">
             <button
@@ -253,7 +264,12 @@ const OrderDeliveryStaffManagement = () => {
                 <td colSpan="6">Không có đơn hàng</td>
               </tr>
             ) : (
-              filteredOrders.map((order) => (
+              filteredOrders.filter((order) => {
+                  const keyword = searchTerm.toLowerCase();
+                  return (
+                    order._id?.toLowerCase().includes(keyword)       
+                  );
+                }).map((order) => (
                 <tr key={order._id}>
                   <td>{order._id?.slice(0, 10) || "-"}</td>
                   <td>{order.user_name}</td>
