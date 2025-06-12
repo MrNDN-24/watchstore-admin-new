@@ -532,7 +532,7 @@ const BlogManagement = () => {
               {/* RIGHT SIDE TINYMCE EDITOR */}
               <div className="modal-form-right-blog">
                 <Editor
-                  apiKey="6mgto9x0u76s3pavm9e05zjkdbjrzywjib6o56v9chx13h7p"
+                  apiKey={process.env.REACT_APP_API_TINYMCE}
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   value={newBlog.content}
                   init={{
