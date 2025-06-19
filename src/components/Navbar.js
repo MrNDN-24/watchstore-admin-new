@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUser, FaSignOutAlt, FaRegBell } from "react-icons/fa";
+import { FaUser, FaSignOutAlt } from "react-icons/fa";
 import "../styles/Navbar.css";
 import { getUserById } from "../services/userServicesAdmin";
 import defaultAvatar from "../assets/avatar-default.jpg"; // <== thêm dòng này

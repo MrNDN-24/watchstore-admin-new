@@ -13,6 +13,27 @@ import {
 } from "react-icons/fa";
 import "../styles/OrderDetailManagement.css";
 
+// Hàm định dạng tiền tệ
+const formatCurrency = (value) => {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+    minimumFractionDigits: 0,
+  }).format(value);
+};
+
+
+const translatePaymentMethod = (method) => {
+  switch (method) {
+    case "Cash on Delivery":
+      return "Thanh toán khi nhận hàng";
+    case "Bank Transfer":
+      return "Ví Momo";
+    default:
+      return method;
+  } 
+};
+
 const OrderDetailManagement = () => {
   const { orderId } = useParams();
   const navigate = useNavigate();
@@ -28,7 +49,7 @@ const OrderDetailManagement = () => {
         const updatedProducts = await Promise.all(
           orderData.products.map(async (product) => {
             const { data } = await getProductById(product.product_id._id);
-            const detailedProduct = data; // Sử dụng data từ API response
+            const detailedProduct = data;
             return {
               ...product,
               product_id: detailedProduct,
@@ -92,8 +113,12 @@ const OrderDetailManagement = () => {
                     <p className="product-name">
                       <strong>{product.product_id.name}</strong>
                     </p>
-                    <p>Giá: ${product.product_id.price}</p>
+                    <p>Giá: {formatCurrency(product.product_id.price)}</p>
                     <p>Số lượng: {product.quantity}</p>
+                    <p>
+                      Thành tiền:{" "}
+                      {formatCurrency(product.product_id.price * product.quantity)}
+                    </p>
                   </div>
                 </li>
               );
@@ -114,13 +139,13 @@ const OrderDetailManagement = () => {
             <strong>
               <FaDollarSign /> Tổng tiền:
             </strong>{" "}
-            ${order.total_price}
+            {formatCurrency(order.total_price)}
           </p>
           <p>
             <strong>
               <FaCreditCard /> Phương thức thanh toán:
             </strong>{" "}
-            {order.payment_id.method}
+            {translatePaymentMethod(order.payment_id.method)}
           </p>
           <p>
             <strong>

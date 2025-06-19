@@ -1,65 +1,112 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { getOrders, updateOrderStatus } from "../services/orderServicesAdmin";
 import { getCustomerById } from "../services/customerServicesAdmin";
-import {  FaEye ,FaRegCheckCircle,FaTimesCircle} from "react-icons/fa";
-import "../styles/OrderAdminManagement.css";
 import { useNavigate } from "react-router-dom";
+import {
+  FaRegCheckCircle,
+  FaTimesCircle,
+  FaEye,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import "../styles/OrderAdminManagement.css";
 import Pagination from "../components/Pagination";
 import { ToastContainer, toast } from "react-toastify";
+import { getAvailableYears } from "../services/statisticServicesAdmin";
+
 const OrderSaleManagement = () => {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [status, setStatus] = useState("Chờ xử lý");
   const [dateFilter, setDateFilter] = useState("all");
   const [loading, setLoading] = useState(true);
-const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [availableYears, setAvailableYears] = useState([]);
+  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
+
+  const months = [
+    { value: "", label: "Tất cả tháng" },
+    { value: "1", label: "Tháng 1" },
+    { value: "2", label: "Tháng 2" },
+    { value: "3", label: "Tháng 3" },
+    { value: "4", label: "Tháng 4" },
+    { value: "5", label: "Tháng 5" },
+    { value: "6", label: "Tháng 6" },
+    { value: "7", label: "Tháng 7" },
+    { value: "8", label: "Tháng 8" },
+    { value: "9", label: "Tháng 9" },
+    { value: "10", label: "Tháng 10" },
+    { value: "11", label: "Tháng 11" },
+    { value: "12", label: "Tháng 12" },
+  ];
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchAvailableYears = async () => {
+      try {
+        const years = await getAvailableYears();
+        setAvailableYears(years);
+      } catch (error) {
+        console.error("Lỗi khi lấy danh sách năm:", error);
+      }
+    };
+
+    fetchAvailableYears();
+  }, []);
   const goToOderDetailManagement = (orderId) => {
-    console.log('Navigating to order details with ID:', orderId);
+    console.log("Navigating to order details with ID:", orderId);
     navigate(`/dashboard/orderdetail-management/${orderId}`);
   };
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 4; 
+  const itemsPerPage = 5;
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
 
+  const fetchOrders = useCallback(
+    async (page) => {
+      try {
+        const data = await getOrders(
+          status,
+          dateFilter,
+          selectedYear,
+          selectedMonth,
+          page,
+          itemsPerPage
+        );
 
+        const ordersWithUserDetails = await Promise.all(
+          data.orders.map(async (order) => {
+            const customerId = order.user_id;
+            const userData = await getCustomerById(customerId);
+            return {
+              ...order,
+              user_name: userData.name,
+            };
+          })
+        );
 
-  const fetchOrders = useCallback(async (page) => {
-    try {
-      const data = await getOrders(status, dateFilter, page, itemsPerPage); 
-      const ordersWithUserDetails = await Promise.all(
-        data.orders.map(async (order) => {
-          const customerId = order.user_id; 
-          const userData = await getCustomerById(customerId); 
-          return {
-            ...order,
-            user_name: userData.name, 
-          };
-        })
-      );
-  
-      setOrders(ordersWithUserDetails);
-      setFilteredOrders(ordersWithUserDetails);
-      setTotalPages(data.totalPages); 
-      setCurrentPage(data.currentPage); 
-      setLoading(false);
-    } catch (error) {
-      console.error("Lỗi khi lấy đơn hàng:", error);
-      setLoading(false);
-    }
-  }, [status, dateFilter, itemsPerPage]); // Chỉ cập nhật lại fetchOrders khi status, dateFilter hoặc itemsPerPage thay đổi
-  
+        setOrders(ordersWithUserDetails);
+        setFilteredOrders(ordersWithUserDetails);
+        setTotalPages(data.totalPages);
+        setCurrentPage(data.currentPage);
+        setLoading(false);
+      } catch (error) {
+        console.error("Lỗi khi lấy đơn hàng:", error);
+        setLoading(false);
+      }
+    },
+    [status, dateFilter, selectedYear, selectedMonth, itemsPerPage]
+  );
+
   useEffect(() => {
-    fetchOrders(currentPage); 
-  }, [currentPage, fetchOrders]); // Chỉ cần fetchOrders và currentPage là dependencies
-  
-  
+    fetchOrders(currentPage);
+  }, [currentPage, fetchOrders]);
 
   const handleStatusChange = (status) => {
     setStatus(status);
@@ -71,27 +118,48 @@ const [searchTerm, setSearchTerm] = useState("");
     setCurrentPage(1);
   };
 
+  const handleYearChange = (e) => {
+    setSelectedYear(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleResetFilters = () => {
+    setStatus("Chờ xử lý");
+    setDateFilter("all");
+    setSelectedYear("");
+    setSelectedMonth("");
+    setCurrentPage(1);
+  };
+
   const handleUpdateStatus = async (orderId, newStatus) => {
     const isConfirmed = window.confirm(
       `Bạn có chắc chắn muốn cập nhật trạng thái đơn hàng thành "${newStatus}" không?`
     );
-  
+
     if (isConfirmed) {
       try {
         await updateOrderStatus(orderId, newStatus);
         const updatedOrders = orders.map((order) =>
-          order._id === orderId ? { ...order, deliveryStatus: newStatus } : order
+          order._id === orderId
+            ? { ...order, deliveryStatus: newStatus }
+            : order
         );
         fetchOrders(currentPage);
         setFilteredOrders(updatedOrders);
-        toast.success(`Trạng thái đơn hàng đã được cập nhật thành "${newStatus}"!`);
+        toast.success(
+          `Trạng thái đơn hàng đã được cập nhật thành "${newStatus}"!`
+        );
       } catch (error) {
         console.error("Lỗi khi cập nhật trạng thái đơn hàng:", error);
         toast.error("Đã xảy ra lỗi khi cập nhật trạng thái đơn hàng.");
       }
     }
   };
-  
 
   const renderActionButtons = (order) => {
     switch (order.deliveryStatus) {
@@ -165,11 +233,11 @@ const [searchTerm, setSearchTerm] = useState("");
     }
   };
 
-  return (
+   return (
     <div className="order-management-wrapper">
       <div className="order-header">
         <h1>Quản Lý Đơn hàng</h1>
-         <div className="search-input-order">
+        <div className="search-input-order">
           <input
             type="text"
             placeholder="Tìm kiếm..."
@@ -189,13 +257,17 @@ const [searchTerm, setSearchTerm] = useState("");
               Chờ xử lý
             </button>
             <button
-              className={`status-btn ${status === "Đã xác nhận" ? "active" : ""}`}
+              className={`status-btn ${
+                status === "Đã xác nhận" ? "active" : ""
+              }`}
               onClick={() => handleStatusChange("Đã xác nhận")}
             >
               Đã xác nhận
             </button>
             <button
-              className={`status-btn ${status === "Đang vận chuyển" ? "active" : ""}`}
+              className={`status-btn ${
+                status === "Đang vận chuyển" ? "active" : ""
+              }`}
               onClick={() => handleStatusChange("Đang vận chuyển")}
             >
               Đang vận chuyển
@@ -214,28 +286,60 @@ const [searchTerm, setSearchTerm] = useState("");
             </button>
           </div>
         </div>
+        {/* Bộ lọc thời gian - nằm ngang */}
+        <div className="time-filters-container">
+          <div className="date-filter">
+            <label className="radio-label">
+              <input
+                type="radio"
+                name="dateFilter"
+                value="today"
+                checked={dateFilter === "today"}
+                onChange={() => handleDateFilterChange("today")}
+              />
+              <span>Hôm nay</span>
+            </label>
+            <label className="radio-label">
+              <input
+                type="radio"
+                name="dateFilter"
+                value="all"
+                checked={dateFilter === "all"}
+                onChange={() => handleDateFilterChange("all")}
+              />
+              <span>Tất cả</span>
+            </label>
+          </div>
 
-        <div className="date-filter">
-          <label>
-            <input
-              type="radio"
-              name="dateFilter"
-              value="today"
-              checked={dateFilter === "today"}
-              onChange={() => handleDateFilterChange("today")}
-            />
-            Hôm nay
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="dateFilter"
-              value="all"
-              checked={dateFilter === "all"}
-              onChange={() => handleDateFilterChange("all")}
-            />
-            Tất cả
-          </label>
+          <div className="year-month-filter">
+            <div className="filter-group">
+              <FaCalendarAlt className="filter-icon" />
+              <label>
+                <select value={selectedYear} onChange={handleYearChange}>
+                  <option value="">Tất cả năm</option>
+                  {availableYears.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            <div className="filter-group">
+              <select value={selectedMonth} onChange={handleMonthChange}>
+                {months.map((month) => (
+                  <option key={month.value} value={month.value}>
+                    {month.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button className="reset-filter-btn" onClick={handleResetFilters}>
+              Đặt lại
+            </button>
+          </div>
         </div>
       </div>
 
@@ -261,21 +365,21 @@ const [searchTerm, setSearchTerm] = useState("");
                 <td colSpan="6">Không có đơn hàng</td>
               </tr>
             ) : (
-              filteredOrders.filter((order) => {
+              filteredOrders
+                .filter((order) => {
                   const keyword = searchTerm.toLowerCase();
-                  return (
-                    order._id?.toLowerCase().includes(keyword)       
-                  );
-                }).map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id?.slice(0, 10) || "-"}</td>
-                  <td>{order.user_name}</td>
-                  <td>{order.deliveryStatus}</td>
-                  <td>{order.total_price.toLocaleString()} VND</td>
-                  <td>{new Date(order.createdAt).toLocaleString()}</td>
-                  <td>{renderActionButtons(order)}</td>
-                </tr>
-              ))
+                  return order._id?.toLowerCase().includes(keyword);
+                })
+                .map((order) => (
+                  <tr key={order._id}>
+                    <td>{order._id?.slice(0, 10) || "-"}</td>
+                    <td>{order.user_name}</td>
+                    <td>{order.deliveryStatus}</td>
+                    <td>{order.total_price.toLocaleString()} VND</td>
+                    <td>{new Date(order.createdAt).toLocaleString()}</td>
+                    <td>{renderActionButtons(order)}</td>
+                  </tr>
+                ))
             )}
           </tbody>
         </table>
@@ -285,7 +389,7 @@ const [searchTerm, setSearchTerm] = useState("");
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-       <ToastContainer />
+      <ToastContainer />
     </div>
   );
 };

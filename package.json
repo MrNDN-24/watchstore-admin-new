@@ -16,6 +16,7 @@
     "@tinymce/tinymce-react": "^6.1.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.7",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.6",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.4",
@@ -39,6 +40,8 @@
     "tinymce": "^7.9.0",
     "typeface-roboto": "^1.1.13",
     "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13",
     "yup": "^1.4.0"
   },
   "scripts": {

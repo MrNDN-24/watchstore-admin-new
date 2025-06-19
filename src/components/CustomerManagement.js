@@ -207,9 +207,9 @@ const CustomerManagement = () => {
             {customers.map((customer) => (
               <tr key={customer._id}>
                 <td>{customer._id?.slice(0, 10) || "-"}</td>
-                <td>{customer.name}</td>
-                <td>{customer.email}</td>
-                <td>{customer.phone}</td>
+                <td>{customer.name?.trim() || "Chưa có tên"}</td>
+                <td>{customer.email?.trim() || "Chưa có email"}</td>
+                <td>{customer.phone?.trim() || "Chưa có số điện thoại"}</td>
                 <td>{customer.isActive ? "Hoạt Động" : "Bị Khóa"}</td>
                 <td>
                   <div className="customer-actions">
@@ -243,24 +243,6 @@ const CustomerManagement = () => {
                         </span>
                       )}
                     </button>
-                    {/* <button
-                        className={`status-btn ${
-                          customer.isActive ? "active" : "inactive"
-                        }`}
-                        onClick={() => handleToggleActive(customer._id)}
-                      >
-                        {customer.isActive ? (
-                          <span className="icon-customer">
-                            
-                            <FaLockOpen />
-                          </span>
-                        ) : (
-                          <span className="icon-customer">
-                            
-                            <FaLock />
-                          </span>
-                        )}
-                      </button> */}
                   </div>
                 </td>
               </tr>

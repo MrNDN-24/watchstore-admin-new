@@ -107,6 +107,7 @@ const PaymentManagement = () => {
           <option value="Đã thanh toán">Đã thanh toán</option>
           <option value="Chưa thanh toán">Chưa thanh toán</option>
           <option value="Hoàn tiền">Hoàn tiền/Hủy mua hàng</option>
+          <option value="Đã hủy">Đã hủy</option>
         </select>
 
         <select

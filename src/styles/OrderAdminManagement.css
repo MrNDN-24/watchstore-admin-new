@@ -1,16 +1,18 @@
+/* ===== Main Wrapper ===== */
 .order-management-wrapper {
   padding: 15px;
   background-color: #f8f9fa;
 }
 
-h1 {
+/* ===== Title ===== */
+.order-management-wrapper h1 {
   text-align: center;
   margin-bottom: 15px;
   font-size: 1.5rem;
 }
 
+/* ===== Status Filter Section ===== */
 .order-status-filter {
-  margin-bottom: 12px;
   text-align: center;
 }
 
@@ -21,16 +23,11 @@ h1 {
   gap: 12px;
 }
 
-.date-filter {
-  margin-bottom: 15px;
-}
-
 .status-btn {
   display: inline-block;
-  padding: 0.5em 1em; /* tăng padding để nút to hơn */
+  padding: 0.5em 1em;
   border-radius: 6px;
-  font-size: 1rem; /* chữ to hơn */
-  background-color: #f0f0f0;
+  font-size: 1rem;
   border: 1px solid #ccc;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -38,7 +35,15 @@ h1 {
   width: fit-content;
 }
 
+/* Status button colors - inactive */
+.status-btn:nth-child(1) { background-color: #a922bd; color: white; }
+.status-btn:nth-child(2) { background-color: #28a745; color: white; }
+.status-btn:nth-child(3) { background-color: #ffc107; color: white; }
+.status-btn:nth-child(4) { background-color: #17a2b8; color: white; }
+.status-btn:nth-child(5) { background-color: #dc3545; color: white; }
+.status-btn:nth-child(6) { background-color: #110e0e; color: white; }
 
+/* Status button colors - active */
 .status-btn.active {
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -46,84 +51,134 @@ h1 {
   border-width: 2px;
   border-color: rgba(0,0,0,0.3);
 }
+.status-btn:nth-child(1).active { background-color: #8a1da0; box-shadow: 0 2px 5px rgba(169, 34, 189, 0.4); }
+.status-btn:nth-child(2).active { background-color: #1e7e34; box-shadow: 0 2px 5px rgba(40, 167, 69, 0.4); }
+.status-btn:nth-child(3).active { background-color: #e0a800; box-shadow: 0 2px 5px rgba(255, 193, 7, 0.4); }
+.status-btn:nth-child(4).active { background-color: #117a8b; box-shadow: 0 2px 5px rgba(23, 162, 184, 0.4); }
+.status-btn:nth-child(5).active { background-color: #bd2130; box-shadow: 0 2px 5px rgba(220, 53, 69, 0.4); }
+.status-btn:nth-child(6).active { background-color: #000; box-shadow: 0 2px 5px rgba(17, 14, 14, 0.4); }
 
-.status-btn:nth-child(1).active {
-  background-color: #8a1da0;
-  color: white;
-  box-shadow: 0 2px 5px rgba(169, 34, 189, 0.4);
+/* ===== Time Filters Section ===== */
+.time-filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  border-radius: 8px;
 }
 
-.status-btn:nth-child(2).active {
-  background-color: #1e7e34;
-  color: white;
-  box-shadow: 0 2px 5px rgba(40, 167, 69, 0.4);
+.date-filter {
+  display: flex;
+  align-items: center;
 }
 
-.status-btn:nth-child(3).active {
-  background-color: #e0a800;
-  color: white;
-  box-shadow: 0 2px 5px rgba(255, 193, 7, 0.4);
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.radio-label:hover { background-color: #e9ecef; }
+
+.year-month-filter {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-.status-btn:nth-child(4).active {
-  background-color: #117a8b;
-  color: white;
-  box-shadow: 0 2px 5px rgba(23, 162, 184, 0.4);
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.filter-group label { font-weight: 500; white-space: nowrap; }
+
+select {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  background-color: white;
+  cursor: pointer;
+  min-width: 120px;
 }
 
-.status-btn:nth-child(5).active {
-  background-color: #bd2130;
+.reset-filter-btn {
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: linear-gradient(to right, #ff6b6b, #dc3545);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   color: white;
-  box-shadow: 0 2px 5px rgba(220, 53, 69, 0.4);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 6px rgba(220, 53, 69, 0.1);
+  position: relative;
+    width: fit-content;
+  overflow: hidden;
 }
 
-.status-btn:nth-child(6).active {
-  background-color: #000;
-  color: white;
-  box-shadow: 0 2px 5px rgba(17, 14, 14, 0.4);
+.reset-filter-btn:hover {
+  box-shadow: 0 6px 10px rgba(220, 53, 69, 0.2);
+  transform: translateY(-2px);
 }
 
-/* Base colors for inactive buttons */
-.status-btn:nth-child(1) {
-  background-color: #a922bd;
-  color: white;
+.reset-filter-btn:active {
+  transform: translateY(0);
 }
 
-.status-btn:nth-child(2) {
-  background-color: #28a745;
-  color: white;
+.reset-filter-btn::before {
+  content: "↻";
+  font-size: 1.1em;
+  transition: transform 0.3s;
 }
 
-.status-btn:nth-child(3) {
-  background-color: #ffc107;
-  color: white;
+.reset-filter-btn:hover::before {
+  transform: rotate(360deg);
 }
 
-.status-btn:nth-child(4) {
-  background-color: #17a2b8;
-  color: white;
+/* Hiệu ứng khi hover */
+.reset-filter-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
 }
 
-.status-btn:nth-child(5) {
-  background-color: #dc3545;
-  color: white;
+.reset-filter-btn:hover::after {
+  transform: translateX(0);
 }
 
-.status-btn:nth-child(6) {
-  background-color: #110e0e;
-  color: white;
+
+/* ===== Search Input ===== */
+.search-input-order {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
+/* ===== Order Table ===== */
 .order-table {
   overflow-x: auto;
   max-height: 400px;
   overflow-y: auto;
   margin: 0 -15px;
 }
-
-.order-table::-webkit-scrollbar {
-  display: none;
-}
+.order-table::-webkit-scrollbar { display: none; }
 
 .order-table table {
   width: 100%;
@@ -141,18 +196,13 @@ h1 {
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 .order-table th {
   background-color: #f4f4f4;
   border-top: 2px solid #110e0e;
   font-size: 0.85rem;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-
-/* Button Layout for Actions */
+/* ===== Action Buttons ===== */
 .order-button-actions {
   display: flex;
   justify-content: center;
@@ -170,35 +220,17 @@ button:hover {
   cursor: pointer;
   transition: all 0.3s;
 }
+.order-button-actions button:hover { transform: scale(1.1); }
 
-.order-button-actions button:hover {
-  transform: scale(1.1);
-}
+.icon-order { font-size: 16px; }
 
-.icon-order {
-  font-size: 16px;
-}
+.order-details { background-color: rgb(221, 90, 221); }
+.order-confirm { background-color: #28a745; }
+.order-shipping { background-color: #ffc107; }
+.order-complete { background-color: #17a2b8; }
+.order-cancel { background-color: #dc3545; }
 
-.order-details {
-  background-color: rgb(221, 90, 221);
-}
-
-.order-confirm {
-  background-color: #28a745;
-}
-
-.order-shipping {
-  background-color: #ffc107;
-}
-
-.order-complete {
-  background-color: #17a2b8;
-}
-
-.order-cancel {
-  background-color: #dc3545;
-}
-
+/* ===== No Orders Message ===== */
 .no-orders-message {
   color: #dc3545;
   font-weight: bold;
@@ -207,19 +239,9 @@ button:hover {
   font-size: 0.9rem;
 }
 
-.search-input-order {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-/* Responsive adjustments */
+/* ===== Responsive Adjustments ===== */
 @media (max-width: 768px) {
-  .order-management-wrapper {
-    padding: 10px;
-  }
+  .order-management-wrapper { padding: 10px; }
   
   .status-btn {
     padding: 5px 8px;
@@ -227,25 +249,27 @@ button:hover {
   }
   
   .order-table th,
-  .order-table td {
-    padding: 6px 8px;
-  }
+  .order-table td { padding: 6px 8px; }
   
   .order-button-actions button {
     width: 26px;
     height: 26px;
   }
   
-  .icon-order {
-    font-size: 14px;
+  .icon-order { font-size: 14px; }
+  
+  .time-filters-container {
+    flex-direction: column;
+    gap: 10px;
   }
+  
+  .date-filter { justify-content: center; }
+  .year-month-filter { justify-content: center; }
+  select { min-width: 100px; }
 }
 
 @media (max-width: 480px) {
-  .status-buttons {
-    gap: 5px;
-  }
-  
+  .status-buttons { gap: 5px; }
   .status-btn {
     padding: 4px 6px;
     font-size: 0.75rem;

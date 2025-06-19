@@ -1,7 +1,7 @@
 /* Container for the entire statistics section */
 .statistics-container {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 0.5rem 2rem;
+  max-width: 1400px;
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa;
@@ -13,7 +13,6 @@ h2 {
   text-align: center;
   font-size: 2.5rem;
   color: #2c3e50;
-  margin-bottom: 2rem;
   font-weight: 600;
   position: relative;
   padding-bottom: 1rem;
@@ -31,6 +30,112 @@ h2::after {
   border-radius: 2px;
 }
 
+/* Thêm vào file CSS */
+.year-selector {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.year-selector label {
+  margin-right: 0.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.year-selector select {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.year-selector select:hover {
+  border-color: #3498db;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.year-selector select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+/* Thêm vào file CSS của bạn */
+.export-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-end;
+}
+
+.export-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  gap: 0.5rem;
+}
+
+.export-buttons button:first-child {
+  background-color: #4CAF50; /* Màu xanh lá */
+  color: white;
+}
+
+.export-buttons button:last-child {
+  background-color: #2196F3; /* Màu xanh dương */
+  color: white;
+}
+
+.export-buttons button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.export-buttons button:first-child:hover {
+  background-color: #3e8e41;
+}
+
+.export-buttons button:last-child:hover {
+  background-color: #0b7dda;
+}
+
+.export-buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.export-buttons button::before {
+  content: "📊";
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .export-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .export-buttons button {
+    width: 100%;
+    padding: 0.6rem 1rem;
+  }
+}
+
+
 /* Summary section */
 .statistics-summary {
   display: grid;
@@ -43,13 +148,15 @@ h2::after {
 .stat-item {
   background: white;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1.2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   border-left: 5px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  overflow: hidden;
 }
 
 .stat-item:hover {
@@ -57,31 +164,61 @@ h2::after {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  z-index: 1;
+}
+
 .stat-item:nth-child(1) {
-  border-color: #2ecc71;
+  border-color: #0fb855;
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), white);
 }
 
 .stat-item:nth-child(2) {
   border-color: #f39c12;
+  background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), white);
 }
 
 .stat-item:nth-child(3) {
   border-color: #3498db;
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), white);
 }
 
 .stat-item:nth-child(4) {
-  border-color: #e74c3c;
+  border-color: #f6c23e;
+  background: linear-gradient(135deg, rgba(246, 194, 62, 0.1), white);
 }
 
 .stat-item:nth-child(5) {
   border-color: #9b59b6;
+  background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), white);
 }
 
+.stat-item:nth-child(6) {
+  border-color: #1abc9c;
+  background: linear-gradient(135deg, rgba(26, 188, 156, 0.1), white);
+}
+
+.stat-item:nth-child(7) {
+  border-color: #d35400;
+  background: linear-gradient(135deg, rgba(211, 84, 0, 0.1), white);
+}
+.stat-item:nth-child(8) {
+  border-color: #3a3b45;
+  background: linear-gradient(135deg, rgba(58, 59, 69, 0.1), white);
+}
 .stat-item h3 {
   font-size: 1rem;
   color: #7f8c8d;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  z-index: 2;
 }
 
 .stat-item p {
@@ -89,10 +226,11 @@ h2::after {
   font-weight: 700;
   color: #2c3e50;
   margin: 0;
+  z-index: 2;
 }
 
 .stat-item:nth-child(1) p {
-  color: #2ecc71;
+  color: #0fb855;
 }
 
 .stat-item:nth-child(2) p {
@@ -104,53 +242,23 @@ h2::after {
 }
 
 .stat-item:nth-child(4) p {
-  color: #e74c3c;
+  color: #f6c23e;
 }
+
 
 .stat-item:nth-child(5) p {
   color: #9b59b6;
 }
 
-/* Export button section */
-.export-section {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-bottom: 2rem;
+.stat-item:nth-child(6) p {
+  color: #1abc9c;
 }
 
-.buttonPDF,
-.buttonExcel {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: none;
+.stat-item:nth-child(7) p {
+  color: #d35400;
 }
-
-.buttonPDF {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-}
-
-.buttonExcel {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-  color: white;
-}
-
-.buttonPDF:hover {
-  background: linear-gradient(135deg, #2980b9, #3498db);
-  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-}
-
-.buttonExcel:hover {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
-  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+.stat-item:nth-child(8) p {
+  color: #3a3b45;
 }
 
 /* Chart container styling */
@@ -160,6 +268,7 @@ h2::after {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
+  border: 1px solid #e0e0e0;
 }
 
 .chart-container h3 {
@@ -168,9 +277,50 @@ h2::after {
   margin-bottom: 1.5rem;
   font-weight: 600;
   text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.chart-container h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  border-radius: 2px;
+}
+
+/* Custom styles for the chart */
+.recharts-cartesian-grid line {
+  stroke: #f0f0f0;
+}
+
+.recharts-tooltip {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  padding: 1rem !important;
+}
+
+.recharts-legend-wrapper {
+  padding-top: 20px !important;
+}
+
+.recharts-legend-item {
+  margin-right: 20px !important;
 }
 
 /* Responsive adjustments */
+@media (max-width: 992px) {
+  .statistics-summary {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .statistics-container {
     padding: 1rem;
@@ -181,7 +331,7 @@ h2::after {
   }
   
   .statistics-summary {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   
   .export-section {
@@ -190,6 +340,24 @@ h2::after {
   
   .chart-container {
     padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .statistics-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item {
+    padding: 1.2rem;
+  }
+  
+  .stat-item h3 {
+    font-size: 0.9rem;
+  }
+  
+  .stat-item p {
+    font-size: 1.5rem;
   }
 }
 
@@ -210,4 +378,115 @@ h2::after {
 
 .statistics-container::-webkit-scrollbar-thumb:hover {
   background: #2980b9;
+}
+
+/* Animation effects */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.statistics-summary {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.chart-container {
+  animation: fadeIn 0.7s ease-out forwards;
+}
+/* Thêm các style mới vào file CSS */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+}
+
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  color: #e74c3c;
+  background-color: #fde8e8;
+  border-radius: 8px;
+  margin: 2rem;
+  font-weight: 500;
+}
+
+.chart-tabs {
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.tab-button {
+  display: inline-flex;         /* 👈 giúp nút co theo nội dung */
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;      /* 👈 giảm padding để sát hơn */
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  white-space: nowrap;          /* 👈 tránh xuống dòng nếu nội dung dài */
+  width: auto;                  /* 👈 đảm bảo không bị cố định chiều rộng */
+}
+/* Icon cho tab Doanh Thu */
+.tab-button:nth-child(1)::before {
+  content: "💰"; /* Biểu tượng tiền */
+}
+
+/* Icon cho tab Giảm Giá */
+.tab-button:nth-child(2)::before {
+  content: "🎁"; /* Biểu tượng quà tặng/giảm giá */
+}
+
+
+.tab-button:hover {
+  background-color: #e9ecef;
+}
+
+.tab-button.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+/* Cập nhật tooltip */
+.recharts-tooltip-wrapper {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+  padding: 1rem !important;
+}
+
+.recharts-tooltip-label {
+  font-weight: 600 !important;
+  color: #2c3e50 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.recharts-tooltip-item {
+  font-size: 0.9rem !important;
+}
+
+/* Thêm icon cho các nút */
+.buttonPDF i, .buttonExcel i {
+  font-size: 1.2rem;
 }

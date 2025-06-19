@@ -13,13 +13,13 @@ const axiosInstance = createAxiosInstance(`${API_BASE_URL}/discounts`);
 //   }
 // };
 
-export const getDiscounts = async (page, limit, search = "") => {
+export const getDiscounts = async (page, limit, search = "",filter) => {
   try {
     const params = new URLSearchParams();
     if (page) params.append("page", page);
     if (limit) params.append("limit", limit);
     if (search) params.append("search", search);
-
+    if(filter) params.append("filter", filter);
     const response = await axiosInstance.get(`/?${params.toString()}`);
     return response.data;
   } catch (error) {

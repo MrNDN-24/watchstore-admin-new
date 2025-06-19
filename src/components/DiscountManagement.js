@@ -37,6 +37,7 @@ const DiscountManagement = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDiscountId, setCurrentDiscountId] = useState(null);
+  const [filter, setFilter] = useState("all"); // Thêm state cho filter
 
   // Phân Trang
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,18 +50,9 @@ const DiscountManagement = () => {
   };
   //Xử lý search
   const [search, setSearch] = useState("");
-  useEffect(() => {
-    getDiscounts(currentPage, itemsPerPage, search)
-      .then((data) => {
-        setDiscounts(data.discounts);
-        setCurrentPage(data.page);
-        setTotalPages(data.totalPages);
-      })
-      .catch((error) => console.error("Lỗi khi lấy thương hiệu:", error));
-  }, [currentPage, search]);
 
   const fetchData = (page) => {
-    getDiscounts(page, itemsPerPage)
+    getDiscounts(page, itemsPerPage, search, filter)
       .then((data) => {
         setDiscounts(data.discounts);
         setCurrentPage(data.page);
@@ -68,10 +60,19 @@ const DiscountManagement = () => {
       })
       .catch((error) => console.error("Lỗi khi lấy thương hiệu:", error));
   };
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+    setCurrentPage(1); // Đã có
+  };
+
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+    setCurrentPage(1); // Đã có
+  };
 
   useEffect(() => {
     fetchData(currentPage);
-  }, [currentPage]);
+  }, [currentPage, search, filter]);
 
   const extractFirstImageFromContent = (htmlContent) => {
     if (!htmlContent) return null;
@@ -422,10 +423,7 @@ const DiscountManagement = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
-    setCurrentPage(1);
-  };
+
   const handleImageUpload = (e) => {
     setNewDiscount({ ...newDiscount, image: e.target.files[0] });
   };
@@ -478,7 +476,48 @@ const DiscountManagement = () => {
           <FaPlusCircle /> Thêm Mới Mã Giảm Giá
         </button>
       </div>
-
+      <div className="discount-filters">
+        <label>
+          <input
+            type="radio"
+            name="discountFilter"
+            value="all"
+            checked={filter === "all"}
+            onChange={handleFilterChange}
+          />
+          <strong>Tất cả</strong>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="discountFilter"
+            value="active"
+            checked={filter === "active"}
+            onChange={handleFilterChange}
+          />
+          <strong>Đang diễn ra</strong>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="discountFilter"
+            value="upcoming"
+            checked={filter === "upcoming"}
+            onChange={handleFilterChange}
+          />
+          <strong>Sắp diễn ra</strong>
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="discountFilter"
+            value="expired"
+            checked={filter === "expired"}
+            onChange={handleFilterChange}
+          />
+          <strong>Đã kết thúc</strong>
+        </label>
+      </div>
       <div className="discount-table">
         <table>
           <thead>
@@ -496,16 +535,10 @@ const DiscountManagement = () => {
           <tbody>
             {discounts.map((discount) => (
               <tr key={discount._id}>
-                <td>{discount.programName}</td>
-                {/* <td>
-                  {discount.programImage && (
-                    <img
-                      src={discount.programImage}
-                      alt="Ảnh CT"
-                      style={{ width: "60px", height: "auto" }}
-                    />
-                  )}
-                </td> */}
+                <td>
+                  {discount.programName?.trim() || "Chưa có tên chương trình"}
+                </td>
+
                 <td>
                   {discount.programImage ? (
                     <img
@@ -513,29 +546,44 @@ const DiscountManagement = () => {
                       alt="Ảnh CT"
                       style={{ width: "80px", height: "auto" }}
                     />
+                  ) : extractFirstImageFromContent(discount.description) ? (
+                    <img
+                      src={extractFirstImageFromContent(discount.description)}
+                      alt="Ảnh từ nội dung"
+                      style={{ width: "80px", height: "auto" }}
+                    />
                   ) : (
-                    extractFirstImageFromContent(discount.description) && (
-                      <img
-                        src={extractFirstImageFromContent(discount.description)}
-                        alt="Ảnh từ nội dung"
-                        style={{ width: "80px", height: "auto" }}
-                      />
-                    )
+                    <span>Không có ảnh</span>
                   )}
                 </td>
-                <td>{discount.code}</td>
-                <td>{getRanksDisplay(discount.applicableRanks)}</td>
+
+                <td>{discount.code?.trim() || "Không có mã"}</td>
+
                 <td>
-                  {new Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(discount.discountValue)}
+                  {getRanksDisplay(discount.applicableRanks) || "Tất cả hạng"}
                 </td>
 
-                <td>{new Date(discount.startDate).toLocaleDateString()}</td>
                 <td>
-                  {new Date(discount.expirationDate).toLocaleDateString()}
+                  {typeof discount.discountValue === "number"
+                    ? new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(discount.discountValue)
+                    : "0 VND"}
                 </td>
+
+                <td>
+                  {discount.startDate
+                    ? new Date(discount.startDate).toLocaleDateString()
+                    : "Không rõ"}
+                </td>
+
+                <td>
+                  {discount.expirationDate
+                    ? new Date(discount.expirationDate).toLocaleDateString()
+                    : "Không rõ"}
+                </td>
+
                 <td>
                   <div className="discount-actions">
                     <button
@@ -543,7 +591,6 @@ const DiscountManagement = () => {
                       onClick={() => openViewModal(discount)}
                     >
                       <span className="icon-blog">
-                        {" "}
                         <FaEye />
                       </span>
                     </button>
@@ -679,29 +726,37 @@ const DiscountManagement = () => {
                   </div>
                 ) : null}
 
-                <label htmlFor="discount-image-upload" className="upload-button">
-                              <FaImage className="upload-icon" />
-                              Chọn ảnh
-                            </label>
-                            <input
-                              id="discount-image-upload"
-                              type="file"
-                              accept="image/*"
-                              onChange={handleImageUpload}
-                              style={{ display: "none" }}
-                            />
+                <label
+                  htmlFor="discount-image-upload"
+                  className="upload-button"
+                >
+                  <FaImage className="upload-icon" />
+                  Chọn ảnh
+                </label>
+                <input
+                  id="discount-image-upload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ display: "none" }}
+                />
                 <label>Số tiền giảm:</label>
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Giảm Giá (VND)"
-                  value={newDiscount.discountValue}
-                  onChange={(e) =>
+                  value={new Intl.NumberFormat("vi-VN").format(
+                    newDiscount.discountValue
+                  )}
+                  onChange={(e) => {
+                    // Loại bỏ mọi ký tự không phải số
+                    const rawValue = e.target.value.replace(/[^0-9]/g, "");
                     setNewDiscount({
                       ...newDiscount,
-                      discountValue: e.target.value,
-                    })
-                  }
+                      discountValue: Number(rawValue),
+                    });
+                  }}
                 />
+
                 <label>Hạng áp dụng:</label>
                 <select
                   value={newDiscount.applicableRanks}

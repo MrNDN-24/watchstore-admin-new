@@ -455,3 +455,61 @@ border-top: 2px solid #2c3e50;
     max-height: 150px;
   }
 }
+/* Discount Filters */
+.discount-filters {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.discount-filters label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #555;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.discount-filters label:hover {
+  background-color: #f0f0f0;
+}
+
+.discount-filters input[type="radio"] {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Highlight selected filter */
+.discount-filters label input[type="radio"]:checked + span {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .discount-filters {
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .discount-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .discount-search {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .add-discount-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
+}

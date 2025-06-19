@@ -25,11 +25,13 @@ export const getOrderDetails = async (orderId) => {
   }
 };
 
-export const getOrders = async (status, dateFilter, page = 1, limit = 4) => {
+export const getOrders = async (status, dateFilter, year, month, page = 1, limit = 4) => {
   try {
     const params = {
       status,
       dateFilter,
+      year,
+      month,
       page,
       limit
     };
